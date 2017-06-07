@@ -2,6 +2,7 @@ package us.supercheng.mediaplayer.app;/**
  * Created by cl799honchen on 6/5/2017.
  */
 
+import com.sun.jndi.toolkit.url.Uri;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -27,13 +28,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URLEncoder;
 
 
 public class App extends Application {
     final private String EncodingChars = "UTF-8";
     final private String App_Name = "Light Weight Media Player";
-    final private int App_Default_Width = 280;
+    final private int App_Default_Width = 480;
     final private int App_Default_Height = 720;
     final private String FXML_Folder_Path = "/FXMLs/";
     final private String FXML_Extension = ".fxml";
@@ -42,12 +44,10 @@ public class App extends Application {
     final private String Media_Play_Btn_Finishing_Stage = "||";
 
 
-
     private String mediaFileFullURI = "";
     // private File mediaFile;
     private Media mediaFile;
     private MediaPlayer player;
-
 
 
     // private FileChooser fileChooser;
@@ -57,6 +57,7 @@ public class App extends Application {
     private MenuItem menuItemOpenFile;
     private MenuItem menuItemOpenURL;
     private MenuItem menuItemCloseApp;
+    private MenuItem menuItemHttpProxySetting;
 
     private Label mediaVolumeSliderLabel;
     private Slider mediaVolumeSlider;
@@ -70,8 +71,9 @@ public class App extends Application {
     private ToolBar bottomToolBar;
 
 
-
-    public App(){
+    public App() {
+        // System.setProperty("http.proxyHost","10.110.17.6");
+        // System.setProperty("http.proxyPort","8080");
         this.mediaVolumeSliderLabel = new Label("Volume: 100%");
         this.mediaVolumeSlider = new Slider();
         this.mediaVolumeSlider.setMin(0.0);
@@ -88,10 +90,13 @@ public class App extends Application {
         this.menuFile = new Menu("Menu");
         this.menuItemOpenFile = new MenuItem("File Path");
         this.menuItemOpenURL = new MenuItem("File URL");
+        this.menuItemHttpProxySetting = new MenuItem("HTTP Proxy Setting");
         this.menuItemCloseApp = new MenuItem("Exit");
+
 
         this.menuFile.getItems().add(this.menuItemOpenFile);
         this.menuFile.getItems().add(this.menuItemOpenURL);
+        this.menuFile.getItems().add(this.menuItemHttpProxySetting);
         this.menuFile.getItems().add(this.menuItemCloseApp);
 
         this.rootPanel = new BorderPane();
@@ -115,7 +120,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle(App_Name);
         Scene scene = new Scene(this.rootPanel, App_Default_Width, App_Default_Height);
         Pane paneBottom = new Pane();
@@ -123,14 +128,36 @@ public class App extends Application {
         // Close App
         this.menuItemCloseApp.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                ((Stage)menuBar.getScene().getWindow()).close();
+                ((Stage) menuBar.getScene().getWindow()).close();
+            }
+        });
+
+        // Set Proxy
+        this.menuItemHttpProxySetting.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Stage tempStage = new Stage();
+                Pane tempPane = new Pane();
+                Scene scene = new Scene(tempPane, 280, 60);
+                TextField txtField_Proxy_URL = new TextField ();
+                TextField txtField_Proxy_Port = new TextField ();
+                tempStage.setTitle("Setting HTTP Proxy");
+                Button btn_Set_Proxy = new Button("Set HTTP Proxy");
+                txtField_Proxy_URL.setPromptText("Enter Valid HTTP Proxy Port");
+                txtField_Proxy_Port.setPromptText("Enter Valid HTTP Proxy URL");
+
+                tempPane.getChildren().add(txtField_Proxy_URL);
+                tempPane.getChildren().add(txtField_Proxy_Port);
+                tempPane.getChildren().add(btn_Set_Proxy);
+
+                tempStage.setScene(scene);
+                tempStage.show();
             }
         });
 
         // Load media from Disk
         this.menuItemOpenFile.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                try{
+                try {
                     // String tempStr = new FileChooser().showOpenDialog((Stage) menuBar.getScene().getWindow()).toURI().toString();
                     // System.out.println(tempStr);
                     player = new MediaPlayer(new Media("file:/C:/Users/cl799honchen/Downloads/SampleAudio_0.7mb.mp3"));
@@ -140,11 +167,34 @@ public class App extends Application {
                             updateMediaProgress();
                         }
                     });
-
                     rootPanel.setCenter(new MediaView(player));
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();   // Dont care
                 }
+            }
+        });
+
+        // Load media over HTTP
+        this.menuItemOpenURL.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                try {
+
+                    // File file = new File("http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02-128k.mp3");
+
+                    // System.out.println("Remote URI: " + file.toURI().toASCIIString());
+                    player = new MediaPlayer(new Media("http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02-128k.mp3"));
+
+
+                    player.currentTimeProperty().addListener(new InvalidationListener() {
+                        public void invalidated(Observable observable) {
+                            updateMediaProgress();
+                        }
+                    });
+                    rootPanel.setCenter(new MediaView(player));
+                } catch (Exception ex) {
+                    ex.printStackTrace();   // Dont care
+                }
+
             }
         });
 
@@ -152,10 +202,10 @@ public class App extends Application {
         this.mediaPlayBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 System.out.println("Player Status: " + player.getStatus());
-                if(player.getStatus().equals(MediaPlayer.Status.PLAYING)){
+                if (player.getStatus().equals(MediaPlayer.Status.PLAYING)) {
                     player.pause();
                     mediaPlayBtn.setText(Media_Play_Btn_Playing_Stage);
-                }else if(player.getStatus().equals(MediaPlayer.Status.PAUSED) || player.getStatus().equals(MediaPlayer.Status.HALTED) || player.getStatus().equals(MediaPlayer.Status.READY)) {
+                } else if (player.getStatus().equals(MediaPlayer.Status.PAUSED) || player.getStatus().equals(MediaPlayer.Status.HALTED) || player.getStatus().equals(MediaPlayer.Status.READY)) {
                     player.play();
                     mediaPlayBtn.setText(Media_Play_Btn_Pausing_Stage);
                 }
@@ -165,8 +215,8 @@ public class App extends Application {
         this.mediaVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 // System.out.println("Old Val: " + oldValue + " New Val: " + newValue);
-                player.setVolume(newValue.doubleValue()/100.00);
-                mediaVolumeSliderLabel.setText("Volume: " + (int)Math.round(player.getVolume()* 100)  + "%");
+                player.setVolume(newValue.doubleValue() / 100.00);
+                mediaVolumeSliderLabel.setText("Volume: " + (int) Math.round(player.getVolume() * 100) + "%");
             }
         });
 
@@ -174,7 +224,7 @@ public class App extends Application {
         this.mediaProgressSlider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 // System.out.println("Old Val: " + oldValue + " New Val: " + newValue);
-                if(mediaProgressSlider.isValueChanging()){
+                if (mediaProgressSlider.isValueChanging()) {
                     player.seek(new Duration(player.getMedia().getDuration().toMillis() * mediaProgressSlider.getValue() / 100));
                 }
             }
@@ -193,13 +243,13 @@ public class App extends Application {
     }
 
     // Update Progress Bar
-    protected void updateMediaProgress(){
-        Platform.runLater(new Runnable(){
+    protected void updateMediaProgress() {
+        Platform.runLater(new Runnable() {
             public void run() {
                 mediaProgressSlider.setValue(player.getCurrentTime().toMillis() / player.getMedia().getDuration().toMillis() * 100);
-                mediaProgressSliderLabel.setText(((int)(player.getCurrentTime().toMillis()/3600000) % 24) + ":" + ((int)(player.getCurrentTime().toMillis()/60000) % 60) +
-                        ":" + ((int)(player.getCurrentTime().toMillis()/1000) % 60) + " / " + ((int)(player.getMedia().getDuration().toMillis()/3600000)%24) + ":" +
-                        ((int)(player.getMedia().getDuration().toMillis()/60000)%60) + ":" + ((int)(player.getMedia().getDuration().toMillis()/1000)%60));
+                mediaProgressSliderLabel.setText(((int) (player.getCurrentTime().toMillis() / 3600000) % 24) + ":" + ((int) (player.getCurrentTime().toMillis() / 60000) % 60) +
+                        ":" + ((int) (player.getCurrentTime().toMillis() / 1000) % 60) + " / " + ((int) (player.getMedia().getDuration().toMillis() / 3600000) % 24) + ":" +
+                        ((int) (player.getMedia().getDuration().toMillis() / 60000) % 60) + ":" + ((int) (player.getMedia().getDuration().toMillis() / 1000) % 60));
             }
         });
     }
