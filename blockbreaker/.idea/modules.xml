@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/media-player.iml" filepath="$PROJECT_DIR$/media-player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blockbreaker.iml" filepath="$PROJECT_DIR$/blockbreaker.iml" />
     </modules>
   </component>
 </project>

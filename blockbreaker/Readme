@@ -1,0 +1,2 @@
+#Go to target dir
+java -cp block-breaker-1.0-SNAPSHOT.jar us.supercheng.blockbreaker.app.App
