@@ -5,6 +5,7 @@ package us.supercheng.crif.auth.app;
  */
 
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -30,29 +31,52 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import sun.misc.IOUtils;
 
 public class AirApiClient {
 
     public static final String SCHEME = "https";
-    public static final String BASE_URL = "DNS_NAME"; // DNS NAME of the AppServer
+    public static final String BASE_URL = "stage.coredev.catfishair.co"; // DNS NAME of the AppServer
     public static final String URL_AUTHENTICATE_DOCUMENT = "/AirApi/1.1/AuthenticateDocument";
     public static final String URL_MATCH_SELFIE = "/AirApi/1.1/MatchSelfie";
     public static final String URL_GET_TRANSACTION_INFO = "/AirApi/1.1/GetTransactionInfo";
-    public static final String accountAccessKey = "";  // Replace with your access key
-    public static final String secretToken = "";  // Replace with your secret token
+    public static final String accountAccessKey = "a01fe10e315ed3d3";  // Replace with your access key
+    public static final String secretToken = "e2f3a5c29df3b7a0";  // Replace with your secret token
 
     public static void main(String... args) {
+        String tempRequestIdentifier = "3211232321";
         try {
             // Authenticate Document
             URIBuilder builder;
             // The scans should be in jpeg or png only
-            File fileFront = new File("/opt/id_1_Front.jpg"); //  Front of Drivers License
-            File fileBack = new File("/opt/id_1_Back.jpg"); // Optional , Back side of Drivers License, In case of passport this is not needed
+            File fileFront = new File("C:\\Users\\cl799honchen\\Desktop\\front.jpg"); //  Front of Drivers License
+            // byte[] name = Base64.getEncoder().encode("hello World".getBytes());
+            // byte[] decodedString = Base64.getDecoder().decode(new String(name).getBytes("UTF-8"));
 
-            ByteArrayBody byteArrayBodyFront = new ByteArrayBody(FileUtils.readFileToByteArray(fileFront), fileFront.getName());
-            ByteArrayBody byteArrayBodyBack = new ByteArrayBody(FileUtils.readFileToByteArray(fileBack), fileBack.getName());
+            // Assume we get this datatype!
+            String base64FrontStr = Base64.encode(FileUtils.readFileToByteArray(fileFront));
+
+            File file = new File("C:\\Users\\cl799honchen\\Snap-On\\auth-id-rest-api\\test-res\\front.txt");
+            String str = FileUtils.readFileToString(file, "utf-8");
+
+            System.out.println(base64FrontStr);
+            System.out.println(str);
+            System.out.println(str.equals(base64FrontStr));
+
+            byte[] imageByteArray = decodeImage(str);
+            System.out.println(imageByteArray);
+            // Assume we get this datatype!
+//            File fileBack = new File("C:\\Users\\cl799honchen\\Desktop\\back.jpg"); // Optional , Back side of Drivers License, In case of passport this is not needed
+            String base64SelfieStr = Base64.encode(FileUtils.readFileToByteArray(new File("C:\\Users\\cl799honchen\\Desktop\\selfie.jpg")));
+            // System.out.println("Input Selfie: \r\n" + base64SelfieStr);
+
+            // ByteArrayBody byteArrayBodyFront = new ByteArrayBody(FileUtils.readFileToByteArray(fileFront), fileFront.getName());
+            ByteArrayBody byteArrayBodyFront = new ByteArrayBody(imageByteArray, fileFront.getName());
+
+
+
+//            ByteArrayBody byteArrayBodyBack = new ByteArrayBody(FileUtils.readFileToByteArray(fileBack), fileBack.getName());
             HttpClient httpClient = HttpClientBuilder.create().build();
-            // httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
 
             builder = new URIBuilder();
@@ -61,18 +85,17 @@ public class AirApiClient {
             HttpPost postRequest = new HttpPost(uri);
             postRequest.setProtocolVersion(HttpVersion.HTTP_1_1);
 
-            // MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
             MultipartEntityBuilder mpEntity = MultipartEntityBuilder.create();
             mpEntity.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
             mpEntity.addPart("front", byteArrayBodyFront);
-            mpEntity.addPart("back", byteArrayBodyBack);
+//            mpEntity.addPart("back", byteArrayBodyBack);
             postRequest.setEntity(mpEntity.build());
 
             postRequest.setHeader("Accept", "application/json");
             postRequest.setHeader("AccountAccessKey", accountAccessKey);
             postRequest.setHeader("SecretToken", secretToken);
-            postRequest.setHeader("RequestIdentifier", "123");  // this is the unique reference for this request which the server will send back in the response.
+            postRequest.setHeader("RequestIdentifier", tempRequestIdentifier);  // this is the unique reference for this request which the server will send back in the response.
             postRequest.setHeader("DocumentType", "License"); // Passport or License or ID2
             postRequest.setHeader("DeviceDetails", "TestDevice");
             postRequest.setHeader("AutoCrop", "True"); // By default this is false, Not needed to be set if images are captured using our SDK
@@ -121,6 +144,8 @@ public class AirApiClient {
                         }
                     }
 
+                    System.out.println("SELFIE: \r\n" + base64photo);
+
                     // OCR Data
                     System.out.println("VIZ : " + documentFieldsJson.get("VIZ"));
                     // 2D Barcode Data
@@ -138,11 +163,11 @@ public class AirApiClient {
                         postRequest.setHeader("Accept", "application/json");
                         postRequest.setHeader("AccountAccessKey", accountAccessKey);
                         postRequest.setHeader("SecretToken", secretToken);
-                        postRequest.setHeader("RequestIdentifier", "123");  // this is the unique reference for this request which the server will send back in the response.
+                        postRequest.setHeader("RequestIdentifier", tempRequestIdentifier);  // this is the unique reference for this request which the server will send back in the response.
 
                         List<NameValuePair> nameValuePairs = new ArrayList();
                         nameValuePairs.add(new BasicNameValuePair("TransactionId", transactionId)); // Transaction Id against which the photo has to be matched
-                        nameValuePairs.add(new BasicNameValuePair("SelfieBase64", base64photo)); // This has to be Live capture base 64 image, JPEG Format. In this sample we use the same image that we get back from authenticate document response.
+                        nameValuePairs.add(new BasicNameValuePair("SelfieBase64", base64SelfieStr)); // This has to be Live capture base 64 image, JPEG Format. In this sample we use the same image that we get back from authenticate document response.
                         postRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         httpClient = HttpClientBuilder.create().build();
@@ -236,5 +261,8 @@ public class AirApiClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static byte[] decodeImage(String imageDataString) {
+        return org.apache.commons.codec.binary.Base64.decodeBase64(imageDataString);
     }
 }
