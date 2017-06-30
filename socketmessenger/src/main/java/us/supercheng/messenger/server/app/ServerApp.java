@@ -12,8 +12,6 @@ public class ServerApp {
     public static void main(String[]  args){
         try{
             MessengerServer server = new MessengerServer(8866);
-            Thread serverOnThread = new Thread(server);
-            serverOnThread.start();
             server.keepOnServer();
         }catch (Exception ex){
             ex.printStackTrace();
