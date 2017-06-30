@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>auth-id-api</display-name>
+	<context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>true</param-value> 
+	</context-param>
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>rest-api</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+		<init-param>
+			<param-name>resteasy.servlet.mapping.prefix</param-name>
+			<param-value>/rest</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>rest-api</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Later !!!
+	<servlet>
+        <servlet-name>RESTEasy WADL</servlet-name>
+        <servlet-class>org.jboss.resteasy.wadl.ResteasyWadlServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>RESTEasy WADL</servlet-name>
+        <url-pattern>/ws/snapon-internal-ws.xml</url-pattern>
+    </servlet-mapping>
+     -->
+</web-app>

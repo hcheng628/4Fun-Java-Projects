@@ -1,0 +1,55 @@
+{
+	"MatchScore": 0,
+	"TransactionId": "df599dba0766cf4e",
+	"MatchResult": "Failed",
+	"LowFRThreshold": 28.00,
+	"MediumFRThreshold": 36.00,
+	"HighFRThreshold": 100.00,
+	"SelfieTests": {
+		"Result": "Failed",
+		"NaturalCapture": {
+			"Natural": "4.53",
+			"Reflect": "95.47"
+		}
+	},
+	"DocumentImageAnalysis": {
+		"Result": "Passed",
+		"ColorSpace": "24-bit Color",
+		"FaceCount": 1
+	},
+	"SelfieScore": [],
+	"DocumentRiskVectorAnalysis": {
+		"Capture Time": {
+			"Result": "Disabled",
+			"ExifData": ""
+		},
+		"Location Analysis": {
+			"Result": "Disabled",
+			"ExifData": ""
+		},
+		"Camera Used": {
+			"Result": "Disabled",
+			"ExifData": null
+		},
+		"Device Orientation": {
+			"Result": "Disabled",
+			"ExifData": null
+		},
+		"Capture Method": {
+			"Result": "Disabled",
+			"ExifData": null
+		},
+		"Capture Type": {
+			"Result": "Disabled",
+			"ExifData": null
+		},
+		"Authenticity Analysis": {
+			"Result": "Disabled",
+			"ExifData": ""
+		},
+		"Result": "Disabled"
+	},
+	"Status": "Failed",
+	"Description": null,
+	"StatusCode": null
+}
