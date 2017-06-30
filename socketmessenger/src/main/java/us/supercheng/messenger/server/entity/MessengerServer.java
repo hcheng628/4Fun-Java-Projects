@@ -12,7 +12,7 @@ import java.util.Vector;
 /**
  * Created by hongyu on 6/25/17.
  */
-public class MessengerServer implements Runnable{
+public class MessengerServer{
     private Vector<Socket> clientSockets;
     private ServerSocket serverSocket;
     private int serverPort;
@@ -26,7 +26,7 @@ public class MessengerServer implements Runnable{
         this.clientSockets = new Vector<Socket>();
     }
 
-    public void run(){
+    public void keepOnServer(){
         Socket newClientSocket = null;
         try{
             while(true){
@@ -37,6 +37,9 @@ public class MessengerServer implements Runnable{
                 // dataIn = new DataInputStream(newClientSocket.getInputStream());
                 dataOut.writeUTF("Connected to Server @ localhost on Port: " + this.serverPort);
                 // System.out.println("Server: " + dataIn.readUTF());
+                ServerSocketAgent newServerSocketAgent = new ServerSocketAgent(newClientSocket, this.clientSockets);
+                Thread newThread = new Thread(newServerSocketAgent);
+                newThread.start();
             }
         }catch (Exception ex){
             ex.printStackTrace();
@@ -47,35 +50,6 @@ public class MessengerServer implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    public void keepOnServer(){
-        String newMsg = "";
-        while(true){
-            try{
-                for(Socket eachClient : this.clientSockets) {
-                    this.dataIn = new DataInputStream(eachClient.getInputStream());
-                    if(this.dataIn != null){
-                        String eachNewMsg = this.dataIn.readUTF();
-                        newMsg = eachNewMsg;
-                    }
-                    if(newMsg.length() > 0){
-                        System.out.println("Server Broadcast Msg: " + newMsg);
-
-                        for(Socket eachOne : this.clientSockets){
-                            this.dataOut = new DataOutputStream(eachOne.getOutputStream());
-                            this.dataOut.writeUTF(newMsg);
-                            newMsg = "";
-                        }
-                    }
-                }
-
-
-            }catch (Exception ex){
-                ex.printStackTrace();
-            }
-
         }
     }
 }
