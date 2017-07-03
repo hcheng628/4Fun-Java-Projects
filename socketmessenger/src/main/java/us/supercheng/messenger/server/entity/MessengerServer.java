@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
@@ -23,6 +24,8 @@ public class MessengerServer{
     public MessengerServer(int serverPort) throws Exception{
         this.serverPort = serverPort;
         this.serverSocket = new ServerSocket(serverPort);
+        InetAddress myIP = InetAddress.getLocalHost();
+        System.out.println("Server running on Host IP: " + myIP.getHostAddress() + " Host Name: " + myIP.getHostName() + " on Port: " + this.serverPort);
         this.clientSockets = new Vector<Socket>();
     }
 
