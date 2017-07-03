@@ -1,7 +1,6 @@
 package us.supercheng.messenger.client.app;
 
 import us.supercheng.messenger.client.entity.MessengerClient;
-
 import java.util.Date;
 
 /**
