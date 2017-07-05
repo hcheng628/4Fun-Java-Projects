@@ -39,7 +39,11 @@ public class MessengerServer{
                 dataOut = new DataOutputStream(newClientSocket.getOutputStream());
                 // dataIn = new DataInputStream(newClientSocket.getInputStream());
                 dataOut.writeUTF("Connected to Server @ localhost on Port: " + this.serverPort);
-                // System.out.println("Server: " + dataIn.readUTF());
+                dataOut.writeUTF("Welcome");
+                Thread.sleep(3000);
+                dataOut.writeUTF("Welcome");
+
+                //System.out.println("Server: " + dataIn.readUTF());
                 ServerSocketAgent newServerSocketAgent = new ServerSocketAgent(newClientSocket, this.clientSockets);
                 Thread newThread = new Thread(newServerSocketAgent);
                 newThread.start();

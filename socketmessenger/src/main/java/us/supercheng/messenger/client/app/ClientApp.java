@@ -1,6 +1,8 @@
 package us.supercheng.messenger.client.app;
 
 import us.supercheng.messenger.client.entity.MessengerClient;
+import us.supercheng.messenger.client.view.ClientMessengerView;
+
 import java.util.Date;
 
 /**
@@ -11,9 +13,10 @@ public class ClientApp {
 
     public static void main(String[]  args){
         try{
-            MessengerClient client = new MessengerClient("localhost","8866");
-            client.sendMessage("Join Request from Client @" + new Date().toString());
-            client.stayOnline();
+            ClientMessengerView clientView = new ClientMessengerView();
+            clientView.setVisible(true);
+            clientView.setResizable(false);
+            clientView.stayOn();
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -9,12 +9,10 @@ import java.util.Vector;
  * Created by hongyu on 6/29/17.
  */
 public class ServerSocketAgent implements Runnable{
-
     DataOutputStream dataOut;
     DataInputStream dataIn;
     Socket clientSocket;
     Vector<Socket> otherClients;
-
 
     public ServerSocketAgent(Socket inClientSocketAgent, Vector<Socket> inOtherClients) throws Exception{
         this.clientSocket = inClientSocketAgent;
@@ -26,9 +24,11 @@ public class ServerSocketAgent implements Runnable{
     public void run() {
         try{
             String eachNewMsg = this.dataIn.readUTF();
+            System.out.println("Server Received: " + eachNewMsg);
             for(Socket eachSocket : this.otherClients){
                 this.dataOut = new DataOutputStream(eachSocket.getOutputStream());
                 this.dataOut.writeUTF(eachNewMsg);
+                System.out.println("Server Sending: " + eachNewMsg);
             }
         }catch (Exception ex){
             ex.printStackTrace();

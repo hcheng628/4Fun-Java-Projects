@@ -7,7 +7,7 @@ import java.net.Socket;
 /**
  * Created by hongyu on 6/25/17.
  */
-public class MessengerClient {
+public class MessengerClient implements Runnable{
     private String serverURL;
     private int serverPort;
     private Socket clientSocket;
@@ -22,11 +22,17 @@ public class MessengerClient {
         this.dataGoingOutClient = new DataOutputStream(this.clientSocket.getOutputStream());
     }
 
-    public void sendMessage(String inputStr) throws Exception{
-        this.dataGoingOutClient.writeUTF(inputStr);
+    public void sendMessage(String inputStr) {
+        // System.out.println("MessageClient sendMessage: " + inputStr);
+        try{
+            this.dataGoingOutClient.writeUTF(inputStr);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
-    public String readMessage() throws Exception{
+    public String readMessage() throws Exception {
         return this.dataComingInClient.readUTF();
     }
 
@@ -34,10 +40,17 @@ public class MessengerClient {
         this.clientSocket.close();
     }
 
-    public void stayOnline() throws Exception{
+    public void run() {
         while(true){
-            String inMsg = this.dataComingInClient.readUTF();
-            System.out.println(inMsg);
+            System.out.println("Running");
+            try{
+                String inMsg = this.dataComingInClient.readUTF();
+                System.out.println(inMsg);
+            }
+            catch(Exception ignore){
+                ignore.printStackTrace();
+            }
+            System.out.println("Running-Complete");
         }
     }
 }
