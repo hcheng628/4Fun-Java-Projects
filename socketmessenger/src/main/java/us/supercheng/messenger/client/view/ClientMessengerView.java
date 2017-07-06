@@ -19,15 +19,13 @@ public class ClientMessengerView extends JFrame {
     private JTextArea paneChatTxt;
     private JScrollPane scroll;
     private MessengerClient messengerClient;
-//    private Vector<String> messageList;
 
-    public ClientMessengerView(){
+    public ClientMessengerView(String inServerURL, String inServerPort){
         super("Bee Bee Messenger");
         try{
         GridBagConstraints layoutConstraints = new GridBagConstraints();
         JPanel panel = new JPanel(new GridBagLayout());
 
-//        this.messageList = inMessageList;
         this.btnSend = new JButton("Send");
         this.txtSend = new JTextField(43);
         this.paneChatTxt = new JTextArea(18,53);
@@ -35,10 +33,8 @@ public class ClientMessengerView extends JFrame {
         this.scroll = new JScrollPane (this.paneChatTxt);
         this.scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        this.messengerClient = new MessengerClient("localhost","8866");
+        this.messengerClient = new MessengerClient(inServerURL,inServerPort, this.paneChatTxt);
         SendBtnActionListener sendBtnListener = new SendBtnActionListener(this.txtSend, this.paneChatTxt, this.messengerClient);
-        System.out.println("MessageClient:" + this.messengerClient);
-
         this.btnSend.addActionListener(sendBtnListener);
 
         layoutConstraints.fill = GridBagConstraints.BOTH;
@@ -69,9 +65,6 @@ public class ClientMessengerView extends JFrame {
         this.add(panel);
         this.pack();
         this.setLocationRelativeTo(null);
-
-        // this.messengerClient.sendMessage("Join Request from Client @" + new Date().toString());
-        this.messengerClient.sendMessage("Thanks");
         } catch (Exception ignore){
             ignore.printStackTrace();
         }

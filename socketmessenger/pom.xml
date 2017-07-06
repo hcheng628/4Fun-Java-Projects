@@ -6,4 +6,53 @@
     <groupId>us.supercheng.messenger</groupId>
     <artifactId>socket-messenger</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Env -->
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <java.version>1.8</java.version>
+
+        <jackson.version>2.8.9</jackson.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!--JSON Helper Start -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!--JSON Helper End -->
+
+
+        <!-- Testing Only Section Start -->
+
+        <!-- junit Start -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- junit End -->
+
+        <!-- Testing Only Section End -->
+
+
+    </dependencies>
 </project>

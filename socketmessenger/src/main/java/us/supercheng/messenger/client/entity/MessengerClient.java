@@ -1,30 +1,38 @@
 package us.supercheng.messenger.client.entity;
 
+import us.supercheng.messenger.common.entity.BeeBeeMessage;
+
+import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.Vector;
 
 /**
  * Created by hongyu on 6/25/17.
  */
 public class MessengerClient implements Runnable{
+    private Vector<String> messageList;
     private String serverURL;
     private int serverPort;
     private Socket clientSocket;
     private DataOutputStream dataGoingOutClient;
     private DataInputStream dataComingInClient;
 
-    public MessengerClient(String inServerURL, String inServerPort) throws Exception{
+    private JTextArea paneChatTxt;
+
+    public MessengerClient(String inServerURL, String inServerPort, JTextArea inPaneChatTxt) throws Exception{
         this.serverURL = inServerURL;
         this.serverPort = Integer.parseInt(inServerPort);
         this.clientSocket = new Socket(this.serverURL, this.serverPort);
         this.dataComingInClient = new DataInputStream(this.clientSocket.getInputStream());
         this.dataGoingOutClient = new DataOutputStream(this.clientSocket.getOutputStream());
+        this.messageList = new Vector<String>();
+        this.paneChatTxt = inPaneChatTxt;
     }
 
     public void sendMessage(String inputStr) {
         try{
-            System.out.println( this + " : " + inputStr);
             this.dataGoingOutClient.writeUTF(inputStr);
         }
         catch(Exception ex){
@@ -42,15 +50,19 @@ public class MessengerClient implements Runnable{
 
     public void run() {
         while(true){
-            System.out.println("Running");
             try{
                 String inMsg = this.dataComingInClient.readUTF();
                 System.out.println(inMsg);
+                this.paneChatTxt.setText(this.paneChatTxt.getText() + inMsg + "\r\n");
+                this.messageList.add(inMsg);
             }
             catch(Exception ignore){
                 ignore.printStackTrace();
             }
-            System.out.println("Running-Complete");
         }
+    }
+
+    public Vector<String> getMessageList(){
+        return this.messageList;
     }
 }

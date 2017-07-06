@@ -8,7 +8,7 @@ import us.supercheng.messenger.client.view.ClientMessengerView;
 public class ClientApp {
     public static void main(String[]  args){
         try{
-            ClientMessengerView clientView = new ClientMessengerView();
+            ClientMessengerView clientView = new ClientMessengerView("localhost","8866");
             clientView.setVisible(true);
             clientView.setResizable(false);
             clientView.stayOn();

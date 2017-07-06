@@ -1,10 +1,11 @@
 package us.supercheng.messenger.client.service;
 
 import us.supercheng.messenger.client.entity.MessengerClient;
-
+import us.supercheng.messenger.common.entity.BeeBeeMessage;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 /**
  * Created by cl799honchen on 7/5/2017.
@@ -13,21 +14,22 @@ public class SendBtnActionListener implements ActionListener {
     private JTextField txtSend;
     private JTextArea paneChatTxt;
     private MessengerClient messengerClient;
+    private BeeBeeMessage bbMsg;
 
     public SendBtnActionListener(JTextField inTxtSend, JTextArea inPaneChatTxt, MessengerClient inMessageClient){
         this.txtSend = inTxtSend;
         this.paneChatTxt = inPaneChatTxt;
         this.messengerClient = inMessageClient;
-        System.out.println("messengerClient:" + this.messengerClient);
+        this.bbMsg = new BeeBeeMessage();
     }
 
     public void actionPerformed(ActionEvent e) {
-        // System.out.println("Sending:" + this.txtSend.getText().trim());
         try{
-            this.messengerClient.sendMessage(this.txtSend.getText().trim());
+            this.bbMsg = new BeeBeeMessage(this.messengerClient.toString(),null, this.txtSend.getText().trim(),new Date());
+            this.messengerClient.sendMessage(this.bbMsg.toString());
+            this.txtSend.setText("");
         }catch (Exception ignore){
             ignore.printStackTrace();
         }
-        // this.paneChatTxt.setText(this.txtSend.getText().trim());
     }
 }
