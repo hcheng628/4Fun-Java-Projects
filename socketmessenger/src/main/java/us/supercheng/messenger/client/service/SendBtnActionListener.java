@@ -25,7 +25,7 @@ public class SendBtnActionListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         try{
-            this.bbMsg = new BeeBeeMessage(this.messengerClient.toString(),null, this.txtSend.getText().trim(),new Date());
+            this.bbMsg = new BeeBeeMessage(this.messengerClient.toString().substring(this.messengerClient.toString().indexOf('@') + 1),null, this.txtSend.getText().trim(),new Date());
             this.messengerClient.sendMessage(this.bbMsg.toString());
             this.txtSend.setText("");
         }catch (Exception ignore){

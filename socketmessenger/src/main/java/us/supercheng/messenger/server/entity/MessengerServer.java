@@ -1,5 +1,7 @@
 package us.supercheng.messenger.server.entity;
 
+import us.supercheng.messenger.common.entity.BeeBeeMessage;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,12 +16,15 @@ import java.util.Vector;
  * Created by hongyu on 6/25/17.
  */
 public class MessengerServer{
+    private final String Server_Name = "Bee Bee Messenger Server Node 13";
+
     private Vector<Socket> clientSockets;
     private ServerSocket serverSocket;
     private int serverPort;
 
-    DataOutputStream dataOut;
-    DataInputStream dataIn;
+    private DataOutputStream dataOut;
+    private DataInputStream dataIn;
+    private BeeBeeMessage bbMsg;
 
     public MessengerServer(int serverPort) throws Exception{
         this.serverPort = serverPort;
@@ -27,6 +32,7 @@ public class MessengerServer{
         InetAddress myIP = InetAddress.getLocalHost();
         System.out.println("Server running on Host IP: " + myIP.getHostAddress() + " Host Name: " + myIP.getHostName() + " on Port: " + this.serverPort);
         this.clientSockets = new Vector<Socket>();
+        this.bbMsg = new BeeBeeMessage();
     }
 
     public void keepOnServer(){
@@ -37,13 +43,8 @@ public class MessengerServer{
                 this.clientSockets.add(newClientSocket);
                 System.out.println("Server: Total Client Socket(s): " + this.clientSockets.size());
                 dataOut = new DataOutputStream(newClientSocket.getOutputStream());
-                // dataIn = new DataInputStream(newClientSocket.getInputStream());
-                dataOut.writeUTF("Connected to Server @ localhost on Port: " + this.serverPort);
-                dataOut.writeUTF("Welcome");
-                Thread.sleep(3000);
-                dataOut.writeUTF("Welcome");
-
-                //System.out.println("Server: " + dataIn.readUTF());
+                this.bbMsg = new BeeBeeMessage(Server_Name, null, "Connected to Server @ localhost on Port: " + this.serverPort, new Date());
+                dataOut.writeUTF(this.bbMsg.toString());
                 ServerSocketAgent newServerSocketAgent = new ServerSocketAgent(newClientSocket, this.clientSockets);
                 Thread newThread = new Thread(newServerSocketAgent);
                 newThread.start();

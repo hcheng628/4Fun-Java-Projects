@@ -18,7 +18,7 @@ public class MessengerClient implements Runnable{
     private Socket clientSocket;
     private DataOutputStream dataGoingOutClient;
     private DataInputStream dataComingInClient;
-
+    private BeeBeeMessage bbMsg;
     private JTextArea paneChatTxt;
 
     public MessengerClient(String inServerURL, String inServerPort, JTextArea inPaneChatTxt) throws Exception{
@@ -29,6 +29,7 @@ public class MessengerClient implements Runnable{
         this.dataGoingOutClient = new DataOutputStream(this.clientSocket.getOutputStream());
         this.messageList = new Vector<String>();
         this.paneChatTxt = inPaneChatTxt;
+        this.bbMsg = new BeeBeeMessage();
     }
 
     public void sendMessage(String inputStr) {
@@ -52,9 +53,14 @@ public class MessengerClient implements Runnable{
         while(true){
             try{
                 String inMsg = this.dataComingInClient.readUTF();
-                System.out.println(inMsg);
-                this.paneChatTxt.setText(this.paneChatTxt.getText() + inMsg + "\r\n");
-                this.messageList.add(inMsg);
+                if(this.bbMsg.toBeeBeeMessage(inMsg) != null){
+                    this.bbMsg = this.bbMsg.toBeeBeeMessage(inMsg);
+                    System.out.println(this.bbMsg);
+                    this.paneChatTxt.setText(this.paneChatTxt.getText() + this.bbMsg.getSender() + ": " + this.bbMsg.getMsg() + "\r\n");
+                    this.messageList.add(inMsg);
+                }else{
+                    this.paneChatTxt.setText(this.paneChatTxt.getText() + inMsg + "\r\n");
+                }
             }
             catch(Exception ignore){
                 ignore.printStackTrace();
