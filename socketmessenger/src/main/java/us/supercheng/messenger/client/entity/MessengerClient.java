@@ -23,8 +23,8 @@ public class MessengerClient implements Runnable{
     }
 
     public void sendMessage(String inputStr) {
-        // System.out.println("MessageClient sendMessage: " + inputStr);
         try{
+            System.out.println( this + " : " + inputStr);
             this.dataGoingOutClient.writeUTF(inputStr);
         }
         catch(Exception ex){

@@ -37,6 +37,8 @@ public class ClientMessengerView extends JFrame {
 
         this.messengerClient = new MessengerClient("localhost","8866");
         SendBtnActionListener sendBtnListener = new SendBtnActionListener(this.txtSend, this.paneChatTxt, this.messengerClient);
+        System.out.println("MessageClient:" + this.messengerClient);
+
         this.btnSend.addActionListener(sendBtnListener);
 
         layoutConstraints.fill = GridBagConstraints.BOTH;
@@ -70,10 +72,6 @@ public class ClientMessengerView extends JFrame {
 
         // this.messengerClient.sendMessage("Join Request from Client @" + new Date().toString());
         this.messengerClient.sendMessage("Thanks");
-
-        this.messengerClient.readMessage();
-        System.out.println("Client Finished");
-
         } catch (Exception ignore){
             ignore.printStackTrace();
         }

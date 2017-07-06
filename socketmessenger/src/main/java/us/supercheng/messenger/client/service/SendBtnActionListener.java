@@ -12,18 +12,19 @@ import java.awt.event.ActionListener;
 public class SendBtnActionListener implements ActionListener {
     private JTextField txtSend;
     private JTextArea paneChatTxt;
-    private MessengerClient messageClient;
+    private MessengerClient messengerClient;
 
     public SendBtnActionListener(JTextField inTxtSend, JTextArea inPaneChatTxt, MessengerClient inMessageClient){
         this.txtSend = inTxtSend;
         this.paneChatTxt = inPaneChatTxt;
-        this.messageClient = inMessageClient;
+        this.messengerClient = inMessageClient;
+        System.out.println("messengerClient:" + this.messengerClient);
     }
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Sending:" + this.txtSend.getText().trim());
+        // System.out.println("Sending:" + this.txtSend.getText().trim());
         try{
-            this.messageClient.sendMessage(this.txtSend.getText().trim());
+            this.messengerClient.sendMessage(this.txtSend.getText().trim());
         }catch (Exception ignore){
             ignore.printStackTrace();
         }

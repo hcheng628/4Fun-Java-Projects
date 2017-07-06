@@ -8,7 +8,7 @@ import java.util.Vector;
 /**
  * Created by hongyu on 6/29/17.
  */
-public class ServerSocketAgent implements Runnable{
+public class ServerSocketAgent implements Runnable {
     DataOutputStream dataOut;
     DataInputStream dataIn;
     Socket clientSocket;
@@ -22,16 +22,23 @@ public class ServerSocketAgent implements Runnable{
     }
 
     public void run() {
-        try{
-            String eachNewMsg = this.dataIn.readUTF();
-            System.out.println("Server Received: " + eachNewMsg);
-            for(Socket eachSocket : this.otherClients){
-                this.dataOut = new DataOutputStream(eachSocket.getOutputStream());
-                this.dataOut.writeUTF(eachNewMsg);
-                System.out.println("Server Sending: " + eachNewMsg);
+        while(true){
+            try{
+                System.out.println(this + "CurrentServerSocketAgent Read to Read");
+                String eachNewMsg = this.dataIn.readUTF();
+                System.out.println("Server Received: " + eachNewMsg);
+                for(Socket eachSocket : this.otherClients){
+                    System.out.println(this + " + eachSocket");
+                    this.dataOut = new DataOutputStream(eachSocket.getOutputStream());
+                    this.dataOut.writeUTF(eachNewMsg);
+                    System.out.println("Server Sending: " + eachNewMsg);
+                }
+                System.out.println("Server-Sending-Done");
+
+            }catch (Exception ex){
+                System.out.println(ex.getMessage());
             }
-        }catch (Exception ex){
-            ex.printStackTrace();
         }
+
     }
 }
