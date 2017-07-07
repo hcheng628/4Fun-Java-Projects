@@ -43,7 +43,7 @@ public class MessengerServer{
                 this.clientSockets.add(newClientSocket);
                 System.out.println("Server: Total Client Socket(s): " + this.clientSockets.size());
                 dataOut = new DataOutputStream(newClientSocket.getOutputStream());
-                this.bbMsg = new BeeBeeMessage(Server_Name, null, "Connected to Server @ localhost on Port: " + this.serverPort, new Date());
+                this.bbMsg = new BeeBeeMessage("S13" , Server_Name, null, "Connected to Server @ localhost on Port: " + this.serverPort, new Date());
                 dataOut.writeUTF(this.bbMsg.toString());
                 ServerSocketAgent newServerSocketAgent = new ServerSocketAgent(newClientSocket, this.clientSockets);
                 Thread newThread = new Thread(newServerSocketAgent);

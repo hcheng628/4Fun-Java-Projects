@@ -24,17 +24,12 @@ public class ServerSocketAgent implements Runnable {
     public void run() {
         while(true){
             try{
-                System.out.println(this + "CurrentServerSocketAgent Read to Read");
                 String eachNewMsg = this.dataIn.readUTF();
                 System.out.println("Server Received: " + eachNewMsg);
                 for(Socket eachSocket : this.otherClients){
-                    System.out.println(this + " + eachSocket");
                     this.dataOut = new DataOutputStream(eachSocket.getOutputStream());
                     this.dataOut.writeUTF(eachNewMsg);
-                    System.out.println("Server Sending: " + eachNewMsg);
                 }
-                System.out.println("Server-Sending-Done");
-
             }catch (Exception ex){
                 System.out.println(ex.getMessage());
             }

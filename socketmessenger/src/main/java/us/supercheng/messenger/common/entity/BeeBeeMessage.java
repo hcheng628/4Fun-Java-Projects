@@ -10,6 +10,7 @@ import java.util.Date;
  */
 
 public class BeeBeeMessage {
+    private String id;
     private String sender;
     private String receiver;
     private String msg;
@@ -19,6 +20,7 @@ public class BeeBeeMessage {
     // This default constructor is needed for jackson2-json-binding
     public BeeBeeMessage(){
         this.jsonMapper = new ObjectMapper();
+        this.id = null;
         this.sender = null;
         this.receiver = null;
         this.msg = null;
@@ -27,8 +29,9 @@ public class BeeBeeMessage {
     // This default constructor is needed for jackson2-json-binding
 
 
-    public BeeBeeMessage(String inSender, String inReveiver, String inMsg, Date inCurrentDateTime){
+    public BeeBeeMessage(String inId, String inSender, String inReveiver, String inMsg, Date inCurrentDateTime){
         this.jsonMapper = new ObjectMapper();
+        this.id = inId;
         this.sender = inSender;
         this.receiver = inReveiver;
         this.msg = inMsg;
@@ -48,6 +51,10 @@ public class BeeBeeMessage {
         return msg;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public Date getCurrentDatetime() {
         return currentDatetime;
     }
@@ -58,6 +65,10 @@ public class BeeBeeMessage {
 
     public void setReceiver(String receiver) {
         this.receiver = receiver;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setMsg(String msg) {
@@ -72,9 +83,7 @@ public class BeeBeeMessage {
     public String toString() {
         String jsonInString = null;
         try{
-            // jsonMapper.writeValue(new File("C://bbmsg.json"),this);
             jsonInString = this.jsonMapper.writeValueAsString(this);
-
         }catch (Exception ex){
             ex.printStackTrace();
         }

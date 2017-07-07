@@ -16,7 +16,7 @@ public class BeeBeeMessageTest {
 
     @Before
     public void warmUp(){
-        this.bbMsg = new BeeBeeMessage("Cheng","Leo", "Come Back", new Date());
+        this.bbMsg = new BeeBeeMessage("1", "Cheng","Leo", "Come Back", new Date());
     }
 
     @Test

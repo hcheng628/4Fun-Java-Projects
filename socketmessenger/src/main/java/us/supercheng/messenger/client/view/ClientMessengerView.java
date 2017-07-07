@@ -16,9 +16,10 @@ public class ClientMessengerView extends JFrame {
 
     private JButton btnSend;
     private JTextField txtSend;
-    private JTextArea paneChatTxt;
     private JScrollPane scroll;
     private MessengerClient messengerClient;
+
+    private JTextPane jTxtPane;
 
     public ClientMessengerView(String inServerURL, String inServerPort){
         super("Bee Bee Messenger");
@@ -28,13 +29,17 @@ public class ClientMessengerView extends JFrame {
 
         this.btnSend = new JButton("Send");
         this.txtSend = new JTextField(43);
-        this.paneChatTxt = new JTextArea(18,53);
-        this.paneChatTxt.setEditable(false);
-        this.scroll = new JScrollPane (this.paneChatTxt);
-        this.scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        this.messengerClient = new MessengerClient(inServerURL,inServerPort, this.paneChatTxt);
-        SendBtnActionListener sendBtnListener = new SendBtnActionListener(this.txtSend, this.paneChatTxt, this.messengerClient);
+        this.jTxtPane = new JTextPane();
+        this.jTxtPane.setContentType("text/html");
+        this.jTxtPane.setEditable(false);
+
+        this.scroll = new JScrollPane (this.jTxtPane);
+        this.scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scroll.setPreferredSize(new Dimension(280,450));
+
+        this.messengerClient = new MessengerClient(inServerURL,inServerPort, this.jTxtPane);
+        SendBtnActionListener sendBtnListener = new SendBtnActionListener(this.txtSend, this.jTxtPane, this.messengerClient);
         this.btnSend.addActionListener(sendBtnListener);
 
         layoutConstraints.fill = GridBagConstraints.BOTH;
