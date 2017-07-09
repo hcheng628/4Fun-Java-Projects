@@ -9,7 +9,7 @@ import java.sql.*;
 /**
  * Created by hongyu on 7/8/17.
  */
-public class UtilsText {
+public class UtilsTest {
 
     private DBHelper dbClient;
 
