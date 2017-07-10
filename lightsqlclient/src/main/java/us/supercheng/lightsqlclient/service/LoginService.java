@@ -31,7 +31,8 @@ public class LoginService implements ActionListener {
         Button button = (Button) e.getSource();
         if(button.getLabel().equals(Login_Btn_Label)){
             this.dbHelper.setDbUsername(this.loginView.getFields().get(3).getText());
-            this.dbHelper.setDbPassword(new String(this.loginView.getPwField().getPassword()));
+            // this.dbHelper.setDbPassword(new String(this.loginView.getPwField().getPassword()));
+            this.dbHelper.setDbPassword("root");
             this.dbHelper.setDbDB_SchemaName(this.loginView.getFields().get(2).getText());
             this.dbHelper.setDbURL(this.loginView.getFields().get(0).getText());
             this.dbHelper.setDbPort(this.loginView.getFields().get(1).getText());

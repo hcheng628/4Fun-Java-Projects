@@ -17,6 +17,7 @@ public class DBHelper {
     private String dbPassword;
     private String dbDB_SchemaName;
     private String dbDriverName;
+    private boolean connectionFlag;
 
     public boolean isConnectionFlag() {
         return connectionFlag;
@@ -69,19 +70,6 @@ public class DBHelper {
     public void setDbDriverName(String dbDriverName) {
         this.dbDriverName = dbDriverName;
     }
-
-    private boolean connectionFlag;
-
-//    public DBHelper(String inDBUsername, String inDBPassword, String inDB_SchemaName, String inDBURL, String inDBPort, String inDBDriverName){
-//        this.dbUsername = inDBUsername;
-//        this.dbPassword = inDBPassword;
-//        this.dbDB_SchemaName = inDB_SchemaName;
-//        this.dbURL = inDBURL;
-//        this.dbPort = inDBPort;
-//        this.dbDriverName = inDBDriverName;
-//        this.conn = null;
-//        this.statement = null;
-//    }
 
     @Override
     public String toString() {

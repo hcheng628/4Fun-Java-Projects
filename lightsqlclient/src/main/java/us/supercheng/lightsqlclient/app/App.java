@@ -22,11 +22,12 @@ public class App {
         panelMgmt.addToPanelList(IPanelNames.LOGIN_VIEW, loginView);
         panelMgmt.addToPanelList(IPanelNames.DBClient_VIEW, dbClientPaneView);
         panelMgmt.addAllPanestoJFrame(mainFrame);
+
         mainFrame.setContentPane(loginView);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-        // frame.setResizable(false);
+        mainFrame.setResizable(false);
     }
 }

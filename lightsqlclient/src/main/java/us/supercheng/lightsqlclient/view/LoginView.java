@@ -10,6 +10,7 @@ import java.util.Vector;
 /**
  * Created by hongyu on 7/8/17.
  */
+
 public class LoginView extends JPanel{
     private Vector<JLabel> labels;
     private Vector<JTextField> fields;
@@ -44,7 +45,7 @@ public class LoginView extends JPanel{
         this.fields.get(1).setText("3306");
 
         this.fields.add(new JTextField());
-        this.fields.get(2).setText("hcheng");
+        this.fields.get(2).setText("employees");
 
         this.fields.add(new JTextField());
         this.fields.get(3).setText("root");
