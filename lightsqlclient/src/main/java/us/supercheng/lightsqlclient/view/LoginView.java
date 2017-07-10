@@ -1,7 +1,12 @@
 package us.supercheng.lightsqlclient.view;
 
+import us.supercheng.lightsqlclient.service.LoginService;
+import us.supercheng.lightsqlclient.util.DBHelper;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 /**
@@ -14,6 +19,7 @@ public class LoginView extends JFrame{
     private Vector<Button> buttons;
     private JPanel panel;
     private Font font;
+    private DBHelper dbHelper;
 
     public LoginView(){
         this.font = new Font("SansSerif", Font.BOLD, 20);
@@ -64,6 +70,10 @@ public class LoginView extends JFrame{
         this.panel.setPreferredSize(new Dimension(400,300));
         this.panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Login"));
 
+        this.buttons.get(0).addActionListener(new LoginService(this));
+        this.buttons.get(1).addActionListener(new LoginService(this));
+
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(this.panel);
         this.pack();
@@ -72,12 +82,16 @@ public class LoginView extends JFrame{
         this.setResizable(false);
 
     }
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginView();
-            }
-        });
+
+    public Vector<JTextField> getFields(){
+        return this.fields;
     }
+
+    public JPasswordField getPwField(){
+        return this.pwField;
+    }
+
+//    public static void main(String args[]) {
+//
+//    }
 }

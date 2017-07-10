@@ -18,6 +18,12 @@ public class DBHelper {
     private String dbDB_SchemaName;
     private String dbDriverName;
 
+    public boolean isConnectionFlag() {
+        return connectionFlag;
+    }
+
+    private boolean connectionFlag;
+
     public DBHelper(String inDBUsername, String inDBPassword, String inDB_SchemaName, String inDBURL, String inDBPort, String inDBDriverName){
         this.dbUsername = inDBUsername;
         this.dbPassword = inDBPassword;
@@ -27,21 +33,54 @@ public class DBHelper {
         this.dbDriverName = inDBDriverName;
         this.conn = null;
         this.statement = null;
+    }
+
+    @Override
+    public String toString() {
+        return "DBHelper{" +
+                "conn=" + conn +
+                ", statement=" + statement +
+                ", dbURL='" + dbURL + '\'' +
+                ", dbPort='" + dbPort + '\'' +
+                ", dbUsername='" + dbUsername + '\'' +
+                ", dbPassword='" + dbPassword + '\'' +
+                ", dbDB_SchemaName='" + dbDB_SchemaName + '\'' +
+                ", dbDriverName='" + dbDriverName + '\'' +
+                ", connectionFlag=" + connectionFlag +
+                '}';
+    }
+
+    public boolean connectDB(){
 
         try{
             this.conn = DriverManager.getConnection("jdbc:" + this.dbDriverName +
                             "://" + this.dbURL + ":" + this.dbPort + "/" + this.dbDB_SchemaName + "?serverTimezone=UCT&useSSL=false",
                     this.dbUsername,this.dbPassword);
+
+
+
             this.statement = conn.createStatement();
+            this.connectionFlag = true;
+            return true;
         }catch (Exception ex){
             ex.printStackTrace();
+            return false;
         }
     }
 
-    public Connection getConnection(){
-        return this.conn;
+    public boolean disconnectDB(){
+        try{
+            if(this.conn != null){
+                this.conn.close();
+            }
+            this.connectionFlag = false;
+            return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+            this.connectionFlag = false;
+            return false;
+        }
     }
-
 
     public int executeQuery(String inQuery) throws Exception {
         return this.statement.executeUpdate(inQuery);
@@ -51,16 +90,7 @@ public class DBHelper {
         return this.statement.executeQuery(inQuery);
     }
 
-    public boolean disconnectDB(){
-        try{
-            if(this.conn != null){
-                this.conn.close();
-            }
-            return true;
-        }catch(Exception ex){
-            ex.printStackTrace();
-            return false;
-        }
+    public Connection getConnection(){
+        return this.conn;
     }
-
 }

@@ -10,14 +10,8 @@ import us.supercheng.lightsqlclient.view.LoginView;
 public class LoginVIewTest {
     private LoginView loginView;
 
-    @Before
-    public void warmUp(){
-        this.loginView = new LoginView();
-    }
-
     @Test
     public void loginView_Test(){
-        loginView.setVisible(true);
-        loginView.setResizable(false);
+
     }
 }
