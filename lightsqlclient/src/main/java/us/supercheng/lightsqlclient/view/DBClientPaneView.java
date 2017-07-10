@@ -23,9 +23,8 @@ public class DBClientPaneView extends JPanel{
         this.buttons = new Vector<Button>();
         this.buttons.add(new Button("Select Query"));
         this.buttons.add(new Button("Execute Query"));
-
         this.sqlTextArea = new JTextArea(10,50);
-        this.sqlTextArea.setText("select * from employees limit 10;");
+        this.sqlTextArea.setText("select * from course limit 10;");
         this.dbClientPaneService = new DBClientPaneService(this.dbHelper, this);
         this.queryTable = new JTable();
         this.tableModel = (DefaultTableModel) this.queryTable.getModel();
