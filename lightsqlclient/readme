@@ -1,0 +1,11 @@
+Prerequisites:
+
+1. MySQL Server Up n Running + still remember DB username + its passwd ;-0
+2. Load Employees Sample Database not required ;-)
+
+
+Possibile Future Improvements:
+
+1. Adding SQL Server, Oracle, MongoDB, FireBase ..... Drivers
+2. Edit + Delete Records on Query Table
+3. Errors/Exceptions Feedbacks
