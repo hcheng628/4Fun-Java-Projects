@@ -13,10 +13,10 @@
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
         <java.version>1.8</java.version>
 
-        <mysql-client-version>6.0.6</mysql-client-version>
-
+        <!-- Test -->
         <junit.version>4.12</junit.version>
 
+        <mysql-client-version>6.0.6</mysql-client-version>
     </properties>
 
     <build>
@@ -39,7 +39,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-client-version}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -47,5 +46,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

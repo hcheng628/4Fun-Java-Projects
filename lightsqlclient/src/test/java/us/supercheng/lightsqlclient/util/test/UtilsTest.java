@@ -15,7 +15,15 @@ public class UtilsTest {
 
     @Before
     public void warmUp(){
-        this.dbClient = new DBHelper("root","root","employees","127.0.0.1","3306","mysql");
+        this.dbClient = new DBHelper();
+        this.dbClient.setDbUsername("root");
+        this.dbClient.setDbPassword("root");
+        this.dbClient.setDbDB_SchemaName("hcheng");
+        this.dbClient.setDbURL("localhost");
+        this.dbClient.setDbPort("3306");
+        this.dbClient.setDbDriverName("mysql");
+
+        this.dbClient.connectDB();
     }
 
     @Test
@@ -45,7 +53,7 @@ public class UtilsTest {
 
     @Test
     public void testSelectStatement() throws Exception{
-        ResultSet rs = this.dbClient.selectQuery("SELECT * FROM employees limit 10");
+        ResultSet rs = this.dbClient.selectQuery("SELECT * FROM course limit 10");
         int colCount = rs.getMetaData().getColumnCount();
         while(rs.next()){
             for(int i=0;i<colCount;i++){

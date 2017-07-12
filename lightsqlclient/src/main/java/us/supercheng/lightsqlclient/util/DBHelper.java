@@ -17,22 +17,58 @@ public class DBHelper {
     private String dbPassword;
     private String dbDB_SchemaName;
     private String dbDriverName;
+    private boolean connectionFlag;
 
     public boolean isConnectionFlag() {
         return connectionFlag;
     }
 
-    private boolean connectionFlag;
+    public String getDbURL() {
+        return dbURL;
+    }
 
-    public DBHelper(String inDBUsername, String inDBPassword, String inDB_SchemaName, String inDBURL, String inDBPort, String inDBDriverName){
-        this.dbUsername = inDBUsername;
-        this.dbPassword = inDBPassword;
-        this.dbDB_SchemaName = inDB_SchemaName;
-        this.dbURL = inDBURL;
-        this.dbPort = inDBPort;
-        this.dbDriverName = inDBDriverName;
-        this.conn = null;
-        this.statement = null;
+    public void setDbURL(String dbURL) {
+        this.dbURL = dbURL;
+    }
+
+    public String getDbPort() {
+        return dbPort;
+    }
+
+    public void setDbPort(String dbPort) {
+        this.dbPort = dbPort;
+    }
+
+    public String getDbUsername() {
+        return dbUsername;
+    }
+
+    public void setDbUsername(String dbUsername) {
+        this.dbUsername = dbUsername;
+    }
+
+    public String getDbPassword() {
+        return dbPassword;
+    }
+
+    public void setDbPassword(String dbPassword) {
+        this.dbPassword = dbPassword;
+    }
+
+    public String getDbDB_SchemaName() {
+        return dbDB_SchemaName;
+    }
+
+    public void setDbDB_SchemaName(String dbDB_SchemaName) {
+        this.dbDB_SchemaName = dbDB_SchemaName;
+    }
+
+    public String getDbDriverName() {
+        return dbDriverName;
+    }
+
+    public void setDbDriverName(String dbDriverName) {
+        this.dbDriverName = dbDriverName;
     }
 
     @Override
@@ -51,14 +87,10 @@ public class DBHelper {
     }
 
     public boolean connectDB(){
-
         try{
             this.conn = DriverManager.getConnection("jdbc:" + this.dbDriverName +
                             "://" + this.dbURL + ":" + this.dbPort + "/" + this.dbDB_SchemaName + "?serverTimezone=UCT&useSSL=false",
                     this.dbUsername,this.dbPassword);
-
-
-
             this.statement = conn.createStatement();
             this.connectionFlag = true;
             return true;

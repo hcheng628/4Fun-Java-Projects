@@ -2,8 +2,6 @@ package us.supercheng.lightsqlclient.service;
 
 import us.supercheng.lightsqlclient.util.DBHelper;
 import us.supercheng.lightsqlclient.view.DBClientPaneView;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,13 +47,11 @@ public class DBClientPaneService implements ActionListener {
         for(int i=0;i<rs.getMetaData().getColumnCount();i++){
             this.dbClientPaneView.getTableModel().addColumn(rs.getMetaData().getColumnName(i+1));
         }
-
         int rowcount = 0;
         if (rs.last()) {
             rowcount = rs.getRow();
             rs.beforeFirst(); // not rs.first() bc the rs.next() below will move on, missing the first element
         }
-
         while(rs.next()){
             int index = 0;
             String [] record = new String[rs.getMetaData().getColumnCount()];;
@@ -67,7 +63,6 @@ public class DBClientPaneService implements ActionListener {
             index++;
         }
     }
-
     private void updateJTable(int count) throws Exception{
         this.dbClientPaneView.getTableModel().setColumnCount(0);
         this.dbClientPaneView.getTableModel().setRowCount(0);
