@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>us.supercheng.akka.app</groupId>
-    <artifactId>akka-app</artifactId>
+    <groupId>us.supercheng.safe1pass</groupId>
+    <artifactId>safe-1-pass</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <!-- Env -->
@@ -33,22 +33,10 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.11</artifactId>
-            <version>${typesafe.akka.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-        </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+    </dependency>
     </dependencies>
-
-
 </project>
