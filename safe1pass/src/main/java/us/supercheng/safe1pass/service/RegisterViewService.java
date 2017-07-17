@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by hongyu on 7/16/17.
  */
-public class LoginViewService implements ActionListener {
+public class RegisterViewService implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getSource());

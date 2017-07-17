@@ -2,6 +2,7 @@ package us.supercheng.safe1pass.view;
 
 import us.supercheng.safe1pass.service.LoginViewService;
 
+import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ import java.util.Vector;
 /**
  * Created by hongyu on 7/16/17.
  */
-public class LoginView extends JPanel implements ActionListener {
+public class LoginView extends JPanel {
 
     private LoginViewService loginViewService;
 
@@ -20,11 +21,16 @@ public class LoginView extends JPanel implements ActionListener {
     private JPasswordField loginPw;
     private JTextField loginUsernameTxt;
     private CardLayout loginLayout;
+    private JPanel loginPanel;
 
     public LoginView() {
-        //this.loginLayout = new CardLayout();
-        this.setLayout(new CardLayout());
+        super(new CardLayout());
+        this.loginLayout = (CardLayout) this.getLayout();
+        // this.setLayout(new CardLayout());
+        // this.setLayout(this.loginLayout);
         this.loginViewService = new LoginViewService();
+        this.loginPanel = new JPanel(new GridLayout(3,2));
+
 
         this.loginViewBtns = new Vector<JButton>();
         this.loginViewBtns.add(new JButton(IViewKeyword.LOGIN_VIEW_LOGIN));
@@ -41,18 +47,15 @@ public class LoginView extends JPanel implements ActionListener {
         this.loginUsernameTxt = new JTextField();
 
 
-        this.add(this.loginViewLabs.get(0));
-        this.add(this.loginUsernameTxt);
-        this.add(this.loginViewLabs.get(1));
-        this.add(this.loginPw);
-        this.add(this.loginViewBtns.get(0));
-        this.add(this.loginViewBtns.get(1));
-        this.setPreferredSize(new Dimension(500,500));
-    }
+        this.loginPanel.add(this.loginViewLabs.get(0));
+        this.loginPanel.add(this.loginUsernameTxt);
+        this.loginPanel.add(this.loginViewLabs.get(1));
+        this.loginPanel.add(this.loginPw);
+        this.loginPanel.add(this.loginViewBtns.get(0));
+        this.loginPanel.add(this.loginViewBtns.get(1));
+        this.loginPanel.setMaximumSize(new Dimension(200,300));
+        this.setMaximumSize(new Dimension(200,300));
 
-
-
-    public void actionPerformed(ActionEvent e) {
-
+        this.add(this.loginPanel);
     }
 }
