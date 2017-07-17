@@ -1,5 +1,7 @@
 package us.supercheng.safe1pass.service;
 
+import us.supercheng.safe1pass.view.RegisterView;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,7 +10,15 @@ import java.awt.event.ActionListener;
  */
 public class RegisterViewService implements ActionListener {
 
+    private CardLayout cardLayoutControl;
+    private RegisterView selfView;
+
+    public RegisterViewService ( RegisterView inSelfView, CardLayout incardLayoutControl) {
+        this.selfView = inSelfView;
+        this.cardLayoutControl = incardLayoutControl;
+    }
+
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource());
+        this.cardLayoutControl.show(this.selfView,"RegisterView");
     }
 }

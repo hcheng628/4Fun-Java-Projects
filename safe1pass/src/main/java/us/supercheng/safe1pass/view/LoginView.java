@@ -1,12 +1,8 @@
 package us.supercheng.safe1pass.view;
 
 import us.supercheng.safe1pass.service.LoginViewService;
-
-import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 /**
@@ -23,14 +19,12 @@ public class LoginView extends JPanel {
     private CardLayout loginLayout;
     private JPanel loginPanel;
 
-    public LoginView() {
-        super(new CardLayout());
-        this.loginLayout = (CardLayout) this.getLayout();
-        // this.setLayout(new CardLayout());
-        // this.setLayout(this.loginLayout);
-        this.loginViewService = new LoginViewService();
+    public LoginView(JPanel mainPanel) {
+        this.loginLayout = (CardLayout) mainPanel.getLayout();
+        System.out.println(this.loginLayout);
+        this.setLayout(this.loginLayout);
+        this.loginViewService = new LoginViewService(mainPanel);
         this.loginPanel = new JPanel(new GridLayout(3,2));
-
 
         this.loginViewBtns = new Vector<JButton>();
         this.loginViewBtns.add(new JButton(IViewKeyword.LOGIN_VIEW_LOGIN));
@@ -46,7 +40,6 @@ public class LoginView extends JPanel {
         this.loginPw = new JPasswordField();
         this.loginUsernameTxt = new JTextField();
 
-
         this.loginPanel.add(this.loginViewLabs.get(0));
         this.loginPanel.add(this.loginUsernameTxt);
         this.loginPanel.add(this.loginViewLabs.get(1));
@@ -57,5 +50,9 @@ public class LoginView extends JPanel {
         this.setMaximumSize(new Dimension(200,300));
 
         this.add(this.loginPanel);
+    }
+
+    public CardLayout getLoginLayout() {
+        return this.loginLayout;
     }
 }

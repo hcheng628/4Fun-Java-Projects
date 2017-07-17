@@ -1,11 +1,8 @@
 package us.supercheng.safe1pass.view;
 
 import us.supercheng.safe1pass.service.EditorViewService;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 /**
@@ -19,8 +16,8 @@ public class EditorView extends JPanel {
     private  JPanel editorViewPanel;
     private EditorViewService editorViewService;
 
-    public EditorView() {
-        this.editorViewService = new EditorViewService();
+    public EditorView(JPanel mainPanel) {
+        this.editorViewService = new EditorViewService(mainPanel);
         this.editorViewPanel = new JPanel(new FlowLayout());
         this.editorViewTxtArea = new JTextArea(30,15);
 

@@ -19,6 +19,4 @@ public interface IViewKeyword {
     final String EDITOR_VIEW_SAVE = "Save";
     final String EDITOR_VIEW_SAVE_N_CLOSE = "Save and Close";
 
-
-
 }

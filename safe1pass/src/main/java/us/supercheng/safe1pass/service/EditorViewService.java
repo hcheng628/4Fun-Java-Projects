@@ -1,5 +1,6 @@
 package us.supercheng.safe1pass.service;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,12 @@ import java.awt.event.ActionListener;
  */
 
 public class EditorViewService implements ActionListener {
+
+    private JPanel mainPanel;
+
+    public EditorViewService (JPanel mainPanel) {
+        this.mainPanel = mainPanel;
+    }
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getSource());

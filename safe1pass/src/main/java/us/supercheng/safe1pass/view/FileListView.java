@@ -1,11 +1,8 @@
 package us.supercheng.safe1pass.view;
 
 import us.supercheng.safe1pass.service.FileListViewService;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 /**
@@ -19,8 +16,8 @@ public class FileListView extends JPanel {
     private JPanel fileListViewPanel;
     private FileListViewService fileListViewService;
 
-    public FileListView () {
-        this.fileListViewService = new FileListViewService();
+    public FileListView (JPanel mainPanel) {
+        this.fileListViewService = new FileListViewService(mainPanel);
         this.fileListViewLabs = new Vector<JLabel>();
         this.fileListViewLabs.add(new JLabel(IViewKeyword.FILELIST_VIEW_LIST_OF_FILES));
 
