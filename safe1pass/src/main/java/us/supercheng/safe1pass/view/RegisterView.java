@@ -18,7 +18,7 @@ public class RegisterView extends JPanel {
     private RegisterViewService registerViewService;
 
     public RegisterView(JPanel mainPanel) {
-        this.registerViewService = new RegisterViewService(this, (CardLayout)mainPanel.getLayout() );
+        this.registerViewService = new RegisterViewService(mainPanel,this);
         this.registerLabs = new Vector<JLabel>();
         this.registerLabs.add(new JLabel(IViewKeyword.LOGIN_VIEW_USERNAME));
         this.registerLabs.add(new JLabel(IViewKeyword.LOGIN_VIEW_PASSWORD));
@@ -44,5 +44,13 @@ public class RegisterView extends JPanel {
         this.registerPanel.add(this.createAccountBtn);
 
         this.add(this.registerPanel);
+    }
+
+    public JTextField getRegisterTxt() {
+        return registerTxt;
+    }
+
+    public Vector<JPasswordField> getRegisterPws() {
+        return registerPws;
     }
 }

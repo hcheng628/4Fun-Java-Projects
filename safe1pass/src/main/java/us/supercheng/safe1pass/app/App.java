@@ -1,5 +1,6 @@
 package us.supercheng.safe1pass.app;
 
+import us.supercheng.safe1pass.dao.FileDaoImpl;
 import us.supercheng.safe1pass.service.IServiceKeyword;
 import us.supercheng.safe1pass.view.EditorView;
 import us.supercheng.safe1pass.view.FileListView;
@@ -12,7 +13,7 @@ import java.awt.*;
  * Created by hongyu on 7/16/17.
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         JFrame mainFrame = new JFrame("Safe 1 Pass");
         JPanel mainPanel = new JPanel(new CardLayout());
 
