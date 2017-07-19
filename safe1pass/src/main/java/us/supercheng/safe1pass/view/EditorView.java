@@ -11,15 +11,21 @@ import java.util.Vector;
 
 public class EditorView extends JPanel {
 
+    private String postFileFullPath;
+    private String postContent;
     private JTextArea editorViewTxtArea;
     private Vector<JButton> editorViewBtns;
     private  JPanel editorViewPanel;
     private EditorViewService editorViewService;
 
-    public EditorView(JPanel mainPanel) {
+    public EditorView(JPanel mainPanel, String postFileFullPath, String postContent) {
+        this.postFileFullPath = postFileFullPath;
+        this.postContent = postContent;
+
         this.editorViewService = new EditorViewService(mainPanel);
         this.editorViewPanel = new JPanel(new FlowLayout());
         this.editorViewTxtArea = new JTextArea(30,15);
+        this.editorViewTxtArea.setText(postContent);
 
         this.editorViewBtns = new Vector<JButton>();
         this.editorViewBtns.add(new JButton(IViewKeyword.EDITOR_VIEW_SAVE));
@@ -33,5 +39,21 @@ public class EditorView extends JPanel {
         this.editorViewPanel.add(this.editorViewBtns.get(1));
 
         this.add(this.editorViewPanel);
+    }
+
+    public String getPostFileFullPath() {
+        return postFileFullPath;
+    }
+
+    public String getPostContent() {
+        return postContent;
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
+    }
+
+    public void setPostFileFullPath(String postFileFullPath) {
+        this.postFileFullPath = postFileFullPath;
     }
 }

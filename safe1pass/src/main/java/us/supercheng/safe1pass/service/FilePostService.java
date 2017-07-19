@@ -26,4 +26,14 @@ public class FilePostService implements IPostService {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public String getPostContent(String postFilename) {
+        try {
+            System.out.println("Another Checking: " + FILE_REPO_RELATIVE_PATH +  postFilename);
+            return this.fileHelper.readTxtFile(this.getClass().getResource(FILE_REPO_RELATIVE_PATH +  postFilename).toURI().getPath());
+        }catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

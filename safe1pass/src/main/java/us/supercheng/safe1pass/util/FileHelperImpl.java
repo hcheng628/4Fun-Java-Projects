@@ -14,20 +14,22 @@ import java.util.Properties;
 public class FileHelperImpl implements IFileHelper {
 
     @Override
-    public void readTxtFile(String fullFilePath) {
+    public String readTxtFile(String fullFilePath) {
+        String returnStr = "";
         try(BufferedReader br = new BufferedReader(new FileReader(fullFilePath))){
             String line = "";
             while((line = br.readLine()) != null) {
-                System.out.println(line);
+                returnStr += line;
             }
+            return returnStr;
         } catch (Exception ex){
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
     }
 
     @Override
     public void saveTxtFile(String fullFilePath, String txtContent) {
-        System.out.println(fullFilePath);
+        // System.out.println(fullFilePath);
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fullFilePath))){
             bw.write(txtContent);
@@ -53,7 +55,7 @@ public class FileHelperImpl implements IFileHelper {
 
     @Override
     public void createDirectory(String fullDirectoryPath) {
-        System.out.println(fullDirectoryPath);
+        // System.out.println(fullDirectoryPath);
         Path path = Paths.get(fullDirectoryPath);
         if(!Files.exists(path)){
             try{
@@ -66,7 +68,7 @@ public class FileHelperImpl implements IFileHelper {
 
     @Override
     public List<String> getFileList(String fullDirPath) {
-        System.out.println(fullDirPath);
+        // System.out.println(fullDirPath);
         List<String> fileNameList = new ArrayList<String>();
         File [] files = new File(fullDirPath).listFiles();
         for(File file : files){

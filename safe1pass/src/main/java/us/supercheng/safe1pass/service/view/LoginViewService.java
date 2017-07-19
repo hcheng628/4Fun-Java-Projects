@@ -1,6 +1,7 @@
 package us.supercheng.safe1pass.service.view;
 
 import us.supercheng.safe1pass.service.FileCredentialServiceImpl;
+import us.supercheng.safe1pass.view.FileListView;
 import us.supercheng.safe1pass.view.IViewKeyword;
 import us.supercheng.safe1pass.view.LoginView;
 
@@ -32,6 +33,7 @@ public class LoginViewService implements ActionListener {
                 if(this.fileCredentialService.login(this.selfView.getLoginUsernameTxt().getText().replaceAll("\\s+",""),
                         new String(this.selfView.getLoginPw().getPassword()))){
                     goToPanelName = IServiceKeyword.FILELIST_VIEW;
+                    this.mainPanel.add(new FileListView(this.mainPanel, this.selfView.getLoginUsernameTxt().getText().replaceAll("\\s+","")), IServiceKeyword.FILELIST_VIEW);
                 }
             }else if(eventBtn.getText().equals(IViewKeyword.LOGIN_VIEW_REGISTER)) {
                 goToPanelName = IServiceKeyword.REGISTER_VIEW;

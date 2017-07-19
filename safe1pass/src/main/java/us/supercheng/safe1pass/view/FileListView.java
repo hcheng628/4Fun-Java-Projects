@@ -1,6 +1,5 @@
 package us.supercheng.safe1pass.view;
 
-import javafx.scene.control.RadioButton;
 import us.supercheng.safe1pass.service.FilePostService;
 import us.supercheng.safe1pass.service.IPostService;
 import us.supercheng.safe1pass.service.view.FileListViewService;
@@ -11,8 +10,10 @@ import java.util.Vector;
 /**
  * Created by hongyu on 7/16/17.
  */
+
 public class FileListView extends JPanel {
 
+    private String username;
     private Vector<JLabel> fileListViewLabs;
     private Vector<JRadioButton> fileListViewRadio;
     private ButtonGroup fileListViewRadioGroup;
@@ -21,7 +22,8 @@ public class FileListView extends JPanel {
     private FileListViewService fileListViewService;
     private IPostService postService;
 
-    public FileListView (JPanel mainPanel) {
+    public FileListView (JPanel mainPanel, String username) {
+        this.username = username;
         this.postService = new FilePostService();
         this.fileListViewService = new FileListViewService(this, mainPanel);
         this.fileListViewLabs = new Vector<JLabel>();
@@ -40,8 +42,6 @@ public class FileListView extends JPanel {
         this.fileListViewRadio = new Vector<JRadioButton>();
         this.fileListViewRadioGroup = new ButtonGroup();
 
-        // Testing with 2 radios and its labels
-        String username = "Bee";
         for(int i=0; i<this.postService.getListOfPostFiles(username).size();i++) {
             this.fileListViewRadio.add(new JRadioButton(this.postService.getListOfPostFiles(username).get(i)));
             fileListViewRadioGroup.add(this.fileListViewRadio.get(i));
@@ -67,4 +67,21 @@ public class FileListView extends JPanel {
         }
         return "";
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+//    public void refreshFileListView () {
+//        this.fileListViewRadio = new Vector<JRadioButton>();
+//        this.fileListViewRadioGroup = new ButtonGroup();
+//        for(int i=0; i<this.postService.getListOfPostFiles(username).size();i++) {
+//            this.fileListViewRadio.add(new JRadioButton(this.postService.getListOfPostFiles(username).get(i)));
+//            fileListViewRadioGroup.add(this.fileListViewRadio.get(i));
+//        }
+//    }
 }

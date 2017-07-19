@@ -7,4 +7,5 @@ import java.util.List;
  */
 public interface IPostService {
     List<String> getListOfPostFiles(String username);
+    String getPostContent(String postFilename);
 }

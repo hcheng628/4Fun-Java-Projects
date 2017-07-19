@@ -41,7 +41,6 @@ public class FileCredentialServiceImpl implements ICredentialService{
 
     @Override
     public boolean createNewCredential(String username, char[] password, char[] confirm) {
-        System.out.println("username: " + username + "pass: " + new String(password) + " confirm: " + new String(confirm));
         try {
             if(this.findUsername(username) == null){
                 if(this.matchConfirmPassword(password, confirm))     {

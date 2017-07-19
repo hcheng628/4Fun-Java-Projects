@@ -21,7 +21,6 @@ public class LoginView extends JPanel {
 
     public LoginView(JPanel mainPanel) {
         this.loginLayout = (CardLayout) mainPanel.getLayout();
-        System.out.println(this.loginLayout);
         this.setLayout(this.loginLayout);
         this.loginViewService = new LoginViewService(mainPanel, this);
         this.loginPanel = new JPanel(new GridLayout(3,2));

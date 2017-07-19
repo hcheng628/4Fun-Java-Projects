@@ -24,8 +24,7 @@ public class Util_Test {
     @Test
     public void readTxtFile_Test() throws Exception {
         String readTxtFileFullPath = this.getClass().getResource("/" + readTxtFile_Filename).toURI().getPath();
-        System.out.println(readTxtFileFullPath);
-        this.fileHelper.readTxtFile(readTxtFileFullPath);
+        System.out.println(this.fileHelper.readTxtFile(readTxtFileFullPath));
     }
 
     @Test

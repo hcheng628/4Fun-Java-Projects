@@ -18,8 +18,8 @@ public class App {
 
         LoginView loginView = new LoginView(mainPanel);
         RegisterView registerView = new RegisterView(mainPanel);
-        FileListView fileListView = new FileListView(mainPanel);
-        EditorView editorView = new EditorView(mainPanel);
+        FileListView fileListView = new FileListView(mainPanel,"");
+        EditorView editorView = new EditorView(mainPanel, "","");
 
         mainPanel.add(loginView, IServiceKeyword.LOGIN_VIEW);
         mainPanel.add(registerView, IServiceKeyword.REGISTER_VIEW);
