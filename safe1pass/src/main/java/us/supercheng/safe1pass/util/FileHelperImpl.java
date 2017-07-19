@@ -65,7 +65,7 @@ public class FileHelperImpl implements IFileHelper {
     }
 
     @Override
-    public List<String> getPostFileList(String fullDirPath) {
+    public List<String> getFileList(String fullDirPath) {
         System.out.println(fullDirPath);
         List<String> fileNameList = new ArrayList<String>();
         File [] files = new File(fullDirPath).listFiles();

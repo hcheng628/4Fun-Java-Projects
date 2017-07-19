@@ -11,7 +11,7 @@ public interface IFileHelper {
     void saveTxtFile(String fullFilePath, String txtContent);
     void createDirectory(String fullDirectoryPath);
     String getStringFromInputStream(InputStream is);
-    List<String> getPostFileList(String fullDirPath);
+    List<String> getFileList(String fullDirPath);
     String getPropFileValueFromKey(String keyName, String propFileFullPath);
     void savePropFile(String key, String value, String propFileFullPath);
 }

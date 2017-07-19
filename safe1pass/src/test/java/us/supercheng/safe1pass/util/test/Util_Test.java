@@ -40,7 +40,7 @@ public class Util_Test {
 
     @Test
     public void getPostFileList_Test() throws Exception {
-        List<String> fileList = this.fileHelper.getPostFileList(this.getClass().getResource("/Repo/Cheng/").toURI().getPath().toString());
+        List<String> fileList = this.fileHelper.getFileList(this.getClass().getResource("/Repo/Cheng/").toURI().getPath().toString());
         for(String eachFileName : fileList){
             System.out.println(eachFileName);
         }

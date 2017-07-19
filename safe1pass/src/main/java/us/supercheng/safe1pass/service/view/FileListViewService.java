@@ -1,5 +1,6 @@
 package us.supercheng.safe1pass.service.view;
 
+import us.supercheng.safe1pass.view.FileListView;
 import us.supercheng.safe1pass.view.IViewKeyword;
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +12,10 @@ import java.awt.event.ActionListener;
  */
 public class FileListViewService implements ActionListener {
     private JPanel mainPanel;
+    private FileListView selfView;
 
-    public FileListViewService (JPanel mainPanel) {
+    public FileListViewService (FileListView selfView, JPanel mainPanel) {
+        this.selfView = selfView;
         this.mainPanel = mainPanel;
     }
 
@@ -23,6 +26,7 @@ public class FileListViewService implements ActionListener {
                 System.out.println(IViewKeyword.REGISTER_VIEW_CREATE + "File");
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_OPEN)) {
                 ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
+                System.out.println("Selected Post File: " + selfView.getSelectPostFile());
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_REFRESH)) {
                 System.out.println(IViewKeyword.FILELIST_VIEW_REFRESH + "File");
             } else {
