@@ -1,6 +1,6 @@
 package us.supercheng.safe1pass.view;
 
-import us.supercheng.safe1pass.service.LoginViewService;
+import us.supercheng.safe1pass.service.view.LoginViewService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
@@ -23,7 +23,7 @@ public class LoginView extends JPanel {
         this.loginLayout = (CardLayout) mainPanel.getLayout();
         System.out.println(this.loginLayout);
         this.setLayout(this.loginLayout);
-        this.loginViewService = new LoginViewService(mainPanel);
+        this.loginViewService = new LoginViewService(mainPanel, this);
         this.loginPanel = new JPanel(new GridLayout(3,2));
 
         this.loginViewBtns = new Vector<JButton>();
@@ -50,6 +50,14 @@ public class LoginView extends JPanel {
         this.setMaximumSize(new Dimension(200,300));
 
         this.add(this.loginPanel);
+    }
+
+    public JPasswordField getLoginPw() {
+        return loginPw;
+    }
+
+    public JTextField getLoginUsernameTxt() {
+        return loginUsernameTxt;
     }
 
     public CardLayout getLoginLayout() {

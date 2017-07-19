@@ -1,7 +1,6 @@
 package us.supercheng.safe1pass.app;
 
-import us.supercheng.safe1pass.dao.FileDaoImpl;
-import us.supercheng.safe1pass.service.IServiceKeyword;
+import us.supercheng.safe1pass.service.view.IServiceKeyword;
 import us.supercheng.safe1pass.view.EditorView;
 import us.supercheng.safe1pass.view.FileListView;
 import us.supercheng.safe1pass.view.LoginView;

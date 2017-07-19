@@ -1,6 +1,8 @@
-package us.supercheng.safe1pass.service;
+package us.supercheng.safe1pass.service.view;
 
 import us.supercheng.safe1pass.view.IViewKeyword;
+import us.supercheng.safe1pass.view.LoginView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,8 +13,10 @@ import java.awt.event.ActionListener;
  */
 public class LoginViewService implements ActionListener {
     private JPanel mainPanel;
+    private LoginView selfView;
 
-    public LoginViewService(JPanel mainPanel) {
+    public LoginViewService(JPanel mainPanel, LoginView selfView) {
+        this.selfView = selfView;
         this.mainPanel = mainPanel;
     }
 
@@ -22,11 +26,16 @@ public class LoginViewService implements ActionListener {
             String goToPanelName = "";
             JButton eventBtn = (JButton) e.getSource();
             if(eventBtn.getText().equals(IViewKeyword.LOGIN_VIEW_LOGIN)){
-                //FileListView fileListView = new FileListView(this.mainPanel);
                 goToPanelName = IServiceKeyword.FILELIST_VIEW;
+                this.selfView.getLoginUsernameTxt();
+                this.selfView.getLoginPw();
+
+
+
+
             }else if(eventBtn.getText().equals(IViewKeyword.LOGIN_VIEW_REGISTER)) {
-                //RegisterView registerView = new RegisterView(this.mainPanel);
                 goToPanelName = IServiceKeyword.REGISTER_VIEW;
+
             }else {
                 System.out.println("actionPerformed @" + this.getClass().getSimpleName() + ": No Action Performed.");
             }

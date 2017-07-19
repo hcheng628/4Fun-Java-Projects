@@ -1,4 +1,4 @@
-package us.supercheng.safe1pass.service;
+package us.supercheng.safe1pass.service.view;
 
 import us.supercheng.safe1pass.view.IViewKeyword;
 import javax.swing.*;

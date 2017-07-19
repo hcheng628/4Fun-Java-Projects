@@ -1,4 +1,4 @@
-package us.supercheng.safe1pass.service;
+package us.supercheng.safe1pass.service.view;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
 package us.supercheng.safe1pass.view;
 
-import us.supercheng.safe1pass.service.EditorViewService;
+import us.supercheng.safe1pass.service.view.EditorViewService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;

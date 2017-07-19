@@ -1,4 +1,4 @@
-package us.supercheng.safe1pass.service;
+package us.supercheng.safe1pass.service.view;
 
 /**
  * Created by cl799honchen on 7/17/2017.
