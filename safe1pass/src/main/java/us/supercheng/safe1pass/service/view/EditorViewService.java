@@ -34,7 +34,7 @@ public class EditorViewService implements ActionListener {
                 this.postService.savePost(this.selfView.getPostFileFullPath(),selfView.getPostContent());
             } else if (eventBtn.getText() == IViewKeyword.EDITOR_VIEW_SAVE_N_CLOSE) {
                 // Save and Close meaning back to FileListService Page
-                System.out.println("Saving: " + selfView.getPostContent());
+                // System.out.println("Saving: " + selfView.getPostContent());
                 this.postService.savePost(this.selfView.getPostFileFullPath(),selfView.getTextAreaContent());
                 ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.FILELIST_VIEW);
             } else {

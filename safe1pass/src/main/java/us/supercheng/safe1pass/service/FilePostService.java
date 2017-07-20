@@ -45,4 +45,13 @@ public class FilePostService implements IPostService {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public void createNewUserPostRepo(String username) {
+        try {
+            this.fileHelper.createDirectory((this.getClass().getResource(FILE_REPO_RELATIVE_PATH).toURI().getPath() + username + "/").substring(1));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

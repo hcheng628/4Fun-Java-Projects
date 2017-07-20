@@ -1,6 +1,7 @@
 package us.supercheng.safe1pass.service.view;
 
 import us.supercheng.safe1pass.service.FileCredentialServiceImpl;
+import us.supercheng.safe1pass.service.FilePostService;
 import us.supercheng.safe1pass.view.IViewKeyword;
 import us.supercheng.safe1pass.view.RegisterView;
 import javax.swing.*;
@@ -18,11 +19,13 @@ public class RegisterViewService implements ActionListener {
     private JPanel mainPanel;
     private RegisterView selfView;
     private FileCredentialServiceImpl fileCredentialService;
+    private FilePostService postService;
 
     public RegisterViewService (JPanel mainPanel, RegisterView inSelfView) {
         this.mainPanel = mainPanel;
         this.selfView = inSelfView;
         this.fileCredentialService = new FileCredentialServiceImpl();
+        this.postService = new FilePostService();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -34,6 +37,8 @@ public class RegisterViewService implements ActionListener {
                 String newUsername = this.selfView.getRegisterTxt().getText().replaceAll("\\s+","");
                 try {
                     if(this.fileCredentialService.createNewCredential(newUsername,this.selfView.getRegisterPws().get(0).getPassword(), this.selfView.getRegisterPws().get(1).getPassword())) {
+                        // Create New User Post Repo Root Dir
+                        this.postService.createNewUserPostRepo(newUsername);
                         ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, goToPanelName);
                     }
                 } catch (Exception ex) {

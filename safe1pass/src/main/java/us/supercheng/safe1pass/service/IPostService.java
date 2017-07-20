@@ -9,4 +9,5 @@ public interface IPostService {
     List<String> getListOfPostFiles(String username);
     String getPostContent(String postFilename);
     void savePost(String postFilePath, String postContent);
+    void createNewUserPostRepo(String username);
 }
