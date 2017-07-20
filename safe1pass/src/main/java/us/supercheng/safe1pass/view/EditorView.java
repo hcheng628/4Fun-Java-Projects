@@ -22,7 +22,7 @@ public class EditorView extends JPanel {
         this.postFileFullPath = postFileFullPath;
         this.postContent = postContent;
 
-        this.editorViewService = new EditorViewService(mainPanel);
+        this.editorViewService = new EditorViewService(this, mainPanel);
         this.editorViewPanel = new JPanel(new FlowLayout());
         this.editorViewTxtArea = new JTextArea(30,15);
         this.editorViewTxtArea.setText(postContent);
@@ -32,7 +32,6 @@ public class EditorView extends JPanel {
         this.editorViewBtns.get(0).addActionListener(this.editorViewService);
         this.editorViewBtns.add(new JButton(IViewKeyword.EDITOR_VIEW_SAVE_N_CLOSE));
         this.editorViewBtns.get(1).addActionListener(this.editorViewService);
-
 
         this.editorViewPanel.add(this.editorViewTxtArea);
         this.editorViewPanel.add(this.editorViewBtns.get(0));
@@ -46,6 +45,7 @@ public class EditorView extends JPanel {
     }
 
     public String getPostContent() {
+
         return postContent;
     }
 
@@ -55,5 +55,9 @@ public class EditorView extends JPanel {
 
     public void setPostFileFullPath(String postFileFullPath) {
         this.postFileFullPath = postFileFullPath;
+    }
+
+    public String getTextAreaContent() {
+        return this.editorViewTxtArea.getText();
     }
 }

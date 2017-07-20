@@ -29,11 +29,9 @@ public class FileHelperImpl implements IFileHelper {
 
     @Override
     public void saveTxtFile(String fullFilePath, String txtContent) {
-        // System.out.println(fullFilePath);
-
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fullFilePath))){
             bw.write(txtContent);
-            System.out.println("Done");
+            System.out.println(fullFilePath + " Done!");
         } catch (Exception ex){
             ex.printStackTrace();
         }

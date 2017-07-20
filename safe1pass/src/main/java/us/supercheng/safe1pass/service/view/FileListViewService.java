@@ -33,11 +33,9 @@ public class FileListViewService implements ActionListener {
             if(eventBtn.getText().equals(IViewKeyword.REGISTER_VIEW_CREATE)) {
                 System.out.println(IViewKeyword.REGISTER_VIEW_CREATE + "File");
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_OPEN)) {
-                String postContent = this.postService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile());
-                System.out.println("Checking Content:" + postContent);
-
-
-                this.mainPanel.add(new EditorView(this.mainPanel, this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(), postContent), IServiceKeyword.EDITOR_VIEW);
+                // System.out.println("Checking Content:" + postContent);
+                this.mainPanel.add(new EditorView(this.mainPanel, this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),
+                        this.postService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile())), IServiceKeyword.EDITOR_VIEW);
                 ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_REFRESH)) {
                 System.out.println(IViewKeyword.FILELIST_VIEW_REFRESH + "File");

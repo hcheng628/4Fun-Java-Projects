@@ -11,6 +11,7 @@ import java.awt.*;
 /**
  * Created by hongyu on 7/16/17.
  */
+
 public class App {
     public static void main(String[] args) throws Exception{
         JFrame mainFrame = new JFrame("Safe 1 Pass");
