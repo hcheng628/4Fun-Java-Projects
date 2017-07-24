@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IPostService {
     List<String> getListOfPostFiles(String username);
-    String getPostContent(String postFilename);
-    Boolean savePost(String postFilePath, String postContent);
+    String getPostContent(String username, String postFilename);
+    Boolean savePost(String username, String postFilename, String postContent);
     void createNewUserPostRepo(String username);
 }

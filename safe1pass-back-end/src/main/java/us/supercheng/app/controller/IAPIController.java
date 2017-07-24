@@ -20,30 +20,37 @@ public interface IAPIController {
     String ENDPOINT_SAVE_POST = ENDPOINT_CREATE_POST;
     String ENDPOINT_TEST = "/test";
 
+    // Tested
     @RequestMapping(method= RequestMethod.POST, value=ENDPOINT_LOGIN)
     public @ResponseBody
-    Boolean login(@RequestParam(value="username") String username, @RequestParam(value="username") String password);
+    Boolean login(@RequestParam(value="username") String username, @RequestParam(value="password") String password);
 
+    // Tested
     @RequestMapping(method= RequestMethod.POST, value=ENDPOINT_REGISTER)
     public @ResponseBody
-    Boolean register(@RequestParam(value="username") String username, @RequestParam(value="username") String password);
+    Boolean register(@RequestParam(value="username") String username, @RequestParam(value="password") String password);
 
+    // Tested
     @RequestMapping(method= RequestMethod.GET, value=ENDPOINT_LIST_POSTS)
     public @ResponseBody
-    List<String> listPosts(@RequestParam(value="username") String username);
+    List<String> listPosts(@RequestParam(value="username", required=true) String username);
 
+    // Tested
     @RequestMapping(method= RequestMethod.POST, value=ENDPOINT_CREATE_POST)
     public @ResponseBody
-    Boolean createPost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postName);
+    Boolean createPost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postname);
 
+    // Tested
     @RequestMapping(method= RequestMethod.GET, value=ENDPOINT_READ_POST)
     public @ResponseBody
-    String readPost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postName);
+    String readPost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postname);
 
+    // Tested
     @RequestMapping(method= RequestMethod.PUT, value=ENDPOINT_SAVE_POST)
     public @ResponseBody
-    Boolean savePost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postName, @RequestParam(value="postcontent") String postContent);
+    Boolean savePost(@RequestParam(value="username") String username, @RequestParam(value="postname") String postname, @RequestParam(value="postcontent") String postcontent);
 
+    // Tested
     @RequestMapping(method= RequestMethod.GET, value = "/test")
     abstract public @ResponseBody
     Greeting test(@RequestParam(value="name", required=false) String name);

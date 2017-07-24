@@ -61,12 +61,11 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <!-- this is relative to the pom.xml directory -->
                             <targetPath>WEB-INF/</targetPath>
                             <directory>src/main/resources</directory>
                             <exclude>*.properties</exclude>
-                            <exclude>/Repo</exclude>
-                            <exclude>/Password</exclude>
+                            <exclude>/Repo/</exclude>
+                            <exclude>/Password/</exclude>
                         </resource>
                     </webResources>
                 </configuration>

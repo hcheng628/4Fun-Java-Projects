@@ -59,14 +59,13 @@ public class FileHelperImpl implements IFileHelper {
             try{
                 Files.createDirectories(path);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw new RuntimeException(ex);
             }
         }
     }
 
     @Override
     public List<String> getFileList(String fullDirPath) {
-        // System.out.println(fullDirPath);
         List<String> fileNameList = new ArrayList<String>();
         File [] files = new File(fullDirPath).listFiles();
         for(File file : files){
@@ -89,13 +88,12 @@ public class FileHelperImpl implements IFileHelper {
     }
 
     @Override
-    public void savePropFile(String key, String value, InputStream in) {
+    public void savePropFile(String key, String value, InputStream in, String propFullPath) {
         Properties prop = new Properties();
         try{
             prop.load(in);
             prop.setProperty(key,value);
-            //prop.store(new FileOutputStream(propFileFullPath),null);
-            prop.store(new FileOutputStream(this.getClass().getResource()),null);
+            prop.store(new FileOutputStream(propFullPath),null);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

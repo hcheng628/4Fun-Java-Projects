@@ -13,6 +13,6 @@ public interface IFileHelper {
     String getStringFromInputStream(InputStream is);
     List<String> getFileList(String fullDirPath);
     String getPropFileValueFromKey(String keyName, InputStream in);
-    void savePropFile(String key, String value, InputStream in);
+    void savePropFile(String key, String value,InputStream in, String propFullPath);
     String inputStreamToString (InputStream in ) throws Exception;
 }
