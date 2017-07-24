@@ -12,6 +12,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 public class APIConfiguration extends SpringBootServletInitializer{
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        System.out.println("Cheng APIConfiguration: " + this.getClass().getResource("/"));
         return application.sources(APIConfiguration.class);
     }
 
