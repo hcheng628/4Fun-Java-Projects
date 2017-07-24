@@ -1,0 +1,239 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Safe1Pass",
+		"_postman_id": "1a6a565d-dfdb-2a52-6c57-2353db55586d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/login?username=a&password=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ListPosts",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/listposts?username=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"listposts"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SavePost",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/post?username=a&postName=test.txt&postContent=Success",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"post"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "postName",
+							"value": "test.txt",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "postContent",
+							"value": "Success",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ReadPost",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/post?username=a&postName=Post1.txt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"post"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "postName",
+							"value": "Post1.txt",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/register?username=illy&password=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"register"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "illy",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "a",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/test?name=Cheng",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"test"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Cheng",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

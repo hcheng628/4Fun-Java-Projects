@@ -1,0 +1,7 @@
+This Rest API Project has been targeted to deploy on JBoss, why? JBoss? Because I like the word BOSS ;-)
+The core lib of this project is to use Spring Boot.
+
+Feel free to make this project deployable to WebSphere, WebLogic ......
+For Spring Boot, it should work on Tomcat right off the box.
+
+In addition, this project includes a Postman Project to test against all APIs.
