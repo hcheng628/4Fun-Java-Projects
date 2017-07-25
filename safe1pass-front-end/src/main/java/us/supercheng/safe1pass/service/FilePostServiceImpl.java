@@ -8,13 +8,13 @@ import java.util.List;
  * Created by cl799honchen on 7/19/2017.
  */
 
-public class FilePostService implements IPostService {
+public class FilePostServiceImpl implements IPostService {
 
     private final String FILE_REPO_RELATIVE_PATH = "/Repo/";
 
     private IFileHelper fileHelper;
 
-    public FilePostService () {
+    public FilePostServiceImpl() {
         this.fileHelper = new FileHelperImpl();
     }
 
@@ -28,7 +28,7 @@ public class FilePostService implements IPostService {
     }
 
     @Override
-    public String getPostContent(String postFilename) {
+    public String getPostContent(String postFilename, String username) {
         try {
             // System.out.println("Another Checking: " + FILE_REPO_RELATIVE_PATH +  postFilename);
             return this.fileHelper.readTxtFile(this.getClass().getResource(FILE_REPO_RELATIVE_PATH +  postFilename).toURI().getPath());
@@ -38,15 +38,14 @@ public class FilePostService implements IPostService {
     }
 
     @Override
-    public void savePost(String postFilePath, String postContent) {
+    public void savePost(String username, String postname, String postContent) {
         try {
-            this.fileHelper.saveTxtFile(this.getClass().getResource(FILE_REPO_RELATIVE_PATH + postFilePath).toURI().getPath(), postContent);
+            this.fileHelper.saveTxtFile(this.getClass().getResource(FILE_REPO_RELATIVE_PATH + username + postname ).toURI().getPath(), postContent);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    @Override
     public void createNewUserPostRepo(String username) {
         try {
             this.fileHelper.createDirectory((this.getClass().getResource(FILE_REPO_RELATIVE_PATH).toURI().getPath() + username + "/").substring(1));

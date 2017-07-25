@@ -1,9 +1,7 @@
 package us.supercheng.safe1pass.service.view;
 
-import us.supercheng.safe1pass.service.FilePostService;
+import us.supercheng.safe1pass.service.FilePostServiceImpl;
 import us.supercheng.safe1pass.service.IPostService;
-import us.supercheng.safe1pass.util.FileHelperImpl;
-import us.supercheng.safe1pass.util.IFileHelper;
 import us.supercheng.safe1pass.view.EditorView;
 import us.supercheng.safe1pass.view.FileListView;
 import us.supercheng.safe1pass.view.IViewKeyword;
@@ -24,7 +22,7 @@ public class FileListViewService implements ActionListener {
     public FileListViewService (FileListView selfView, JPanel mainPanel) {
         this.selfView = selfView;
         this.mainPanel = mainPanel;
-        this.postService = new FilePostService();
+        this.postService = new FilePostServiceImpl();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -35,7 +33,7 @@ public class FileListViewService implements ActionListener {
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_OPEN)) {
                 // System.out.println("Checking Content:" + postContent);
                 this.mainPanel.add(new EditorView(this.mainPanel, this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),
-                        this.postService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile())), IServiceKeyword.EDITOR_VIEW);
+                        this.postService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),this.selfView.getUsername())), IServiceKeyword.EDITOR_VIEW);
                 ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_REFRESH)) {
                 System.out.println(IViewKeyword.FILELIST_VIEW_REFRESH + "File");

@@ -59,7 +59,6 @@ public class FileCredentialServiceImpl implements ICredentialService{
         return false;
     }
 
-    @Override
     public boolean matchConfirmPassword(char[] password, char[] confirm) {
         return new String(password).equals(new String(confirm)) ? true : false;
     }

@@ -8,5 +8,4 @@ public interface ICredentialService {
     String findUsername(String username);
     boolean login(String username, String password);
     boolean createNewCredential(String username, char[] password, char[] confirm);
-    boolean matchConfirmPassword(char[] password, char[] confirm);
 }

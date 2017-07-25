@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by cl799honchen on 7/17/2017.
  */
-public class Util_Test {
+public class UtilFileHelper_Test {
     final String readTxtFile_Filename = "readTxtFile_Test.txt";
     final String saveTxtFile_Filename = "saveTxtFile_Test.txt";
     final String createDirectory_FullPath = "C:\\Users\\cl799honchen\\Desktop" + "\\ChengCheng\\";

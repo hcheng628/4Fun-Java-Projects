@@ -1,6 +1,6 @@
 package us.supercheng.safe1pass.view;
 
-import us.supercheng.safe1pass.service.FilePostService;
+import us.supercheng.safe1pass.service.FilePostServiceImpl;
 import us.supercheng.safe1pass.service.IPostService;
 import us.supercheng.safe1pass.service.view.FileListViewService;
 import javax.swing.*;
@@ -24,7 +24,7 @@ public class FileListView extends JPanel {
 
     public FileListView (JPanel mainPanel, String username) {
         this.username = username;
-        this.postService = new FilePostService();
+        this.postService = new FilePostServiceImpl();
         this.fileListViewService = new FileListViewService(this, mainPanel);
         this.fileListViewLabs = new Vector<JLabel>();
         this.fileListViewLabs.add(new JLabel(IViewKeyword.FILELIST_VIEW_LIST_OF_FILES));

@@ -1,7 +1,7 @@
 package us.supercheng.safe1pass.service.view;
 
 import us.supercheng.safe1pass.service.FileCredentialServiceImpl;
-import us.supercheng.safe1pass.service.FilePostService;
+import us.supercheng.safe1pass.service.FilePostServiceImpl;
 import us.supercheng.safe1pass.view.IViewKeyword;
 import us.supercheng.safe1pass.view.RegisterView;
 import javax.swing.*;
@@ -19,13 +19,13 @@ public class RegisterViewService implements ActionListener {
     private JPanel mainPanel;
     private RegisterView selfView;
     private FileCredentialServiceImpl fileCredentialService;
-    private FilePostService postService;
+    private FilePostServiceImpl postService;
 
     public RegisterViewService (JPanel mainPanel, RegisterView inSelfView) {
         this.mainPanel = mainPanel;
         this.selfView = inSelfView;
         this.fileCredentialService = new FileCredentialServiceImpl();
-        this.postService = new FilePostService();
+        this.postService = new FilePostServiceImpl();
     }
 
     public void actionPerformed(ActionEvent e) {
