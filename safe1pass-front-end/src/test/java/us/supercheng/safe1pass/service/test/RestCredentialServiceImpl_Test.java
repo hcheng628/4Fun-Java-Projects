@@ -3,7 +3,6 @@ package us.supercheng.safe1pass.service.test;
 import org.junit.Before;
 import org.junit.Test;
 import us.supercheng.safe1pass.service.RestCredentialServiceImpl;
-import us.supercheng.safe1pass.service.RestPostServiceImpl;
 
 import java.util.Properties;
 

@@ -3,6 +3,7 @@ package us.supercheng.safe1pass.view;
 import us.supercheng.safe1pass.service.view.RegisterViewService;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -17,8 +18,8 @@ public class RegisterView extends JPanel {
     private JPanel registerPanel;
     private RegisterViewService registerViewService;
 
-    public RegisterView(JPanel mainPanel) {
-        this.registerViewService = new RegisterViewService(mainPanel,this);
+    public RegisterView(JPanel mainPanel, Properties inAppProp) {
+        this.registerViewService = new RegisterViewService(mainPanel,this, inAppProp);
         this.registerLabs = new Vector<JLabel>();
         this.registerLabs.add(new JLabel(IViewKeyword.LOGIN_VIEW_USERNAME));
         this.registerLabs.add(new JLabel(IViewKeyword.LOGIN_VIEW_PASSWORD));

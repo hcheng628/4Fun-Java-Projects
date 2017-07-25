@@ -1,8 +1,6 @@
 package us.supercheng.safe1pass.service;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import us.supercheng.safe1pass.util.RestAPIHelper;
-
 import java.util.Properties;
 
 /**
@@ -22,6 +20,10 @@ public class RestCredentialServiceImpl implements ICredentialService{
     public RestCredentialServiceImpl (Properties inAPIProp) {
         this.restAPIHelper = new RestAPIHelper();
         this.restAPIProp = inAPIProp;
+    }
+
+    public Properties getRestAPIProp() {
+        return restAPIProp;
     }
 
     @Override

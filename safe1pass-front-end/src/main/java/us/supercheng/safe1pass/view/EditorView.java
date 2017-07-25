@@ -3,6 +3,7 @@ package us.supercheng.safe1pass.view;
 import us.supercheng.safe1pass.service.view.EditorViewService;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -18,11 +19,11 @@ public class EditorView extends JPanel {
     private  JPanel editorViewPanel;
     private EditorViewService editorViewService;
 
-    public EditorView(JPanel mainPanel, String postFileFullPath, String postContent) {
+    public EditorView(JPanel mainPanel, String postFileFullPath, String postContent, Properties inAppProp) {
         this.postFileFullPath = postFileFullPath;
         this.postContent = postContent;
 
-        this.editorViewService = new EditorViewService(this, mainPanel);
+        this.editorViewService = new EditorViewService(this, mainPanel, inAppProp);
         this.editorViewPanel = new JPanel(new FlowLayout());
         this.editorViewTxtArea = new JTextArea(30,15);
         this.editorViewTxtArea.setText(postContent);

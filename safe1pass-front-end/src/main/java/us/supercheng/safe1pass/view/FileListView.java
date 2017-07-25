@@ -2,9 +2,11 @@ package us.supercheng.safe1pass.view;
 
 import us.supercheng.safe1pass.service.FilePostServiceImpl;
 import us.supercheng.safe1pass.service.IPostService;
+import us.supercheng.safe1pass.service.RestPostServiceImpl;
 import us.supercheng.safe1pass.service.view.FileListViewService;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -20,12 +22,12 @@ public class FileListView extends JPanel {
     private Vector<JButton> fileListViewBtns;
     private JPanel fileListViewPanel;
     private FileListViewService fileListViewService;
-    private IPostService postService;
+    private RestPostServiceImpl restPostService;
 
-    public FileListView (JPanel mainPanel, String username) {
+    public FileListView (JPanel mainPanel, String username, Properties inAppProp) {
         this.username = username;
-        this.postService = new FilePostServiceImpl();
-        this.fileListViewService = new FileListViewService(this, mainPanel);
+        this.restPostService = new RestPostServiceImpl(inAppProp);
+        this.fileListViewService = new FileListViewService(this, mainPanel, inAppProp);
         this.fileListViewLabs = new Vector<JLabel>();
         this.fileListViewLabs.add(new JLabel(IViewKeyword.FILELIST_VIEW_LIST_OF_FILES));
 
@@ -42,11 +44,12 @@ public class FileListView extends JPanel {
         this.fileListViewRadio = new Vector<JRadioButton>();
         this.fileListViewRadioGroup = new ButtonGroup();
 
-        for(int i=0; i<this.postService.getListOfPostFiles(username).size();i++) {
-            this.fileListViewRadio.add(new JRadioButton(this.postService.getListOfPostFiles(username).get(i)));
-            fileListViewRadioGroup.add(this.fileListViewRadio.get(i));
+        if (username != null && username.length() > 0) {
+            for(int i=0; i<this.restPostService.getListOfPostFiles(username).size();i++) {
+                this.fileListViewRadio.add(new JRadioButton(this.restPostService.getListOfPostFiles(username).get(i)));
+                fileListViewRadioGroup.add(this.fileListViewRadio.get(i));
+            }
         }
-
 
         this.fileListViewPanel.add(this.fileListViewLabs.get(0));
         for(int i=0;i<this.fileListViewRadio.size(); i++) {

@@ -3,6 +3,7 @@ package us.supercheng.safe1pass.view;
 import us.supercheng.safe1pass.service.view.LoginViewService;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -19,10 +20,10 @@ public class LoginView extends JPanel {
     private CardLayout loginLayout;
     private JPanel loginPanel;
 
-    public LoginView(JPanel mainPanel) {
+    public LoginView(JPanel mainPanel, Properties inAppProp) {
         this.loginLayout = (CardLayout) mainPanel.getLayout();
         this.setLayout(this.loginLayout);
-        this.loginViewService = new LoginViewService(mainPanel, this);
+        this.loginViewService = new LoginViewService(mainPanel, this, inAppProp);
         this.loginPanel = new JPanel(new GridLayout(3,2));
 
         this.loginViewBtns = new Vector<JButton>();

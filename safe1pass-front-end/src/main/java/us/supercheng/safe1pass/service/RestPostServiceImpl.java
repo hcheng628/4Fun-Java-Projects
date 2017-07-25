@@ -25,6 +25,9 @@ public class RestPostServiceImpl implements IPostService{
         this.restAPIProp = inAPIProp;
     }
 
+    public Properties getRestAPIProp() {
+        return restAPIProp;
+    }
 
     @Override
     public List<String> getListOfPostFiles(String username) {
