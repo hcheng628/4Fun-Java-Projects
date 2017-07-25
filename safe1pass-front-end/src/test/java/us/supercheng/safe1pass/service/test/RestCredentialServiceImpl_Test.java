@@ -2,15 +2,17 @@ package us.supercheng.safe1pass.service.test;
 
 import org.junit.Before;
 import org.junit.Test;
+import us.supercheng.safe1pass.service.RestCredentialServiceImpl;
 import us.supercheng.safe1pass.service.RestPostServiceImpl;
+
 import java.util.Properties;
 
 /**
  * Created by cl799honchen on 7/17/2017.
  */
-public class RestPostServiceImpl_Test {
+public class RestCredentialServiceImpl_Test {
 
-    private RestPostServiceImpl restPostService;
+    private RestCredentialServiceImpl restCredentialService;
     private Properties prop;
 
     @Before
@@ -23,23 +25,22 @@ public class RestPostServiceImpl_Test {
         prop.put("rest.api.endpoint.method.listposts","listposts");
         prop.put("rest.api.endpoint.method.post","post");
 
-        this.restPostService = new RestPostServiceImpl(this.prop);
+        this.restCredentialService = new RestCredentialServiceImpl(this.prop);
     }
 
     @Test
-    public void getListOfPostFiles_Test() throws Exception {
-        for(String each : this.restPostService.getListOfPostFiles("a")) {
-            System.out.println("Each: " + each);
-        }
+    public void login_Test() throws Exception {
+       System.out.println( this.restCredentialService.login("a","b"));
     }
 
     @Test
-    public void getPostContent_Test() throws Exception {
-        System.out.println(this.restPostService.getPostContent("Post1.txt","a"));
+    public void findUsername_Test() throws Exception {
+        System.out.println(this.restCredentialService.findUsername("illy"));
     }
 
     @Test
-    public void savePost_Test() {
-        this.restPostService.savePost("a","TestCheng.txt","Having a Test");
+    public void createNewCredential_Test() throws Exception {
+        char [] pass = {'1','2','3'};
+        System.out.println(this.restCredentialService.createNewCredential("Test",pass, pass));
     }
 }

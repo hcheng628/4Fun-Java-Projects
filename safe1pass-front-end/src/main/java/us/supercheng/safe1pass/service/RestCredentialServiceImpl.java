@@ -13,6 +13,7 @@ public class RestCredentialServiceImpl implements ICredentialService{
     private final String RestAPI_Content_Type = "application/x-www-form-urlencoded";
     private final String RestAPI_Key_BASEURL = "rest.api.endpoint.baseurl";
     private final String RestAPI_Key_LOGIN = "rest.api.endpoint.method.login";
+    private final String RestAPI_Key_FINDUSER = "rest.api.endpoint.method.finduser";
     private final String RestAPI_Key_REGISTER = "rest.api.endpoint.method.register";
 
     private RestAPIHelper restAPIHelper;
@@ -24,16 +25,19 @@ public class RestCredentialServiceImpl implements ICredentialService{
     }
 
     @Override
-    public String findUsername(String username) {
-        // Server side needs to Implement this Method
-        return null;
+    public boolean login(String username, String password) {
+        try {
+            return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_LOGIN),
+                    "username=" + username + "&password=" +password, RestAPI_Content_Type));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public String findUsername(String username) {
         try {
-            return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_REGISTER),
-                    "username=" + username + "&password=" +password, RestAPI_Content_Type));
+            return this.restAPIHelper.rest_GET( this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_FINDUSER), "username=" + username);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -42,7 +46,7 @@ public class RestCredentialServiceImpl implements ICredentialService{
     @Override
     public boolean createNewCredential(String username, char[] password, char[] confirm) {
         try {
-            return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_LOGIN),
+            return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_REGISTER),
                     "username=" + username + "&password=" +new String(password), RestAPI_Content_Type));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
