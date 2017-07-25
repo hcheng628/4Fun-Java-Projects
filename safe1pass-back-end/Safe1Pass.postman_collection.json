@@ -83,7 +83,7 @@
 			"name": "SavePost",
 			"request": {
 				"url": {
-					"raw": "http://localhost:8080/app/v1.1/api/post?username=a&postName=test.txt&postContent=Success",
+					"raw": "http://localhost:8080/app/v1.1/api/post?username=a&postname=aaa.txt&postcontent=Success",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -103,13 +103,13 @@
 							"description": ""
 						},
 						{
-							"key": "postName",
-							"value": "test.txt",
+							"key": "postname",
+							"value": "aaa.txt",
 							"equals": true,
 							"description": ""
 						},
 						{
-							"key": "postContent",
+							"key": "postcontent",
 							"value": "Success",
 							"equals": true,
 							"description": ""
@@ -222,6 +222,39 @@
 						{
 							"key": "name",
 							"value": "Cheng",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FindUser",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/app/v1.1/api/finduser?username=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"v1.1",
+						"api",
+						"finduser"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "a",
 							"equals": true,
 							"description": ""
 						}

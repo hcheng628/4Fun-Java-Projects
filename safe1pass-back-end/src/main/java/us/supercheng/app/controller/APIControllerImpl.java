@@ -37,6 +37,11 @@ public class APIControllerImpl implements IAPIController {
     }
 
     @Override
+    public String findUser(String username) {
+        return this.fileCredentialService.findUsername(username);
+    }
+
+    @Override
     public Boolean register(String username, String password) {
         System.out.println("register --- username: " + username + " PW: " + password + " " + this.getClass().getSimpleName());
         if(username != null && password != null ) {

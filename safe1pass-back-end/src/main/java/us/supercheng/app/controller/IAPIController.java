@@ -13,6 +13,7 @@ import java.util.List;
 public interface IAPIController {
 
     String ENDPOINT_LOGIN = "/login";
+    String ENDPOINT_FINDUSER = "/finduser";
     String ENDPOINT_REGISTER = "/register";
     String ENDPOINT_LIST_POSTS = "/listposts";
     String ENDPOINT_CREATE_POST = "/post";
@@ -24,6 +25,10 @@ public interface IAPIController {
     @RequestMapping(method= RequestMethod.POST, value=ENDPOINT_LOGIN)
     public @ResponseBody
     Boolean login(@RequestParam(value="username") String username, @RequestParam(value="password") String password);
+
+    @RequestMapping(method= RequestMethod.GET, value=ENDPOINT_FINDUSER)
+    public @ResponseBody
+    String findUser(@RequestParam(value="username") String username);
 
     // Tested
     @RequestMapping(method= RequestMethod.POST, value=ENDPOINT_REGISTER)
