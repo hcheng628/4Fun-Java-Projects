@@ -16,6 +16,7 @@ import java.util.Vector;
 public class FileListView extends JPanel {
 
     private String username;
+    private JTextField newPostFileTxt;
     private Vector<JLabel> fileListViewLabs;
     private Vector<JRadioButton> fileListViewRadio;
     private ButtonGroup fileListViewRadioGroup;
@@ -31,33 +32,44 @@ public class FileListView extends JPanel {
         this.fileListViewLabs = new Vector<JLabel>();
         this.fileListViewLabs.add(new JLabel(IViewKeyword.FILELIST_VIEW_LIST_OF_FILES));
 
-        this.fileListViewPanel = new JPanel(new FlowLayout());
-
+        this.fileListViewPanel = new JPanel(new BorderLayout());
+        this.newPostFileTxt = new JTextField("",13);
         this.fileListViewBtns = new Vector<JButton>();
         this.fileListViewBtns.add(new JButton(IViewKeyword.REGISTER_VIEW_CREATE));
         this.fileListViewBtns.get(0).addActionListener(this.fileListViewService);
         this.fileListViewBtns.add(new JButton(IViewKeyword.FILELIST_VIEW_OPEN));
         this.fileListViewBtns.get(1).addActionListener(this.fileListViewService);
         this.fileListViewBtns.add(new JButton(IViewKeyword.FILELIST_VIEW_REFRESH));
+
+        // Dont need this at this point ;-)
         this.fileListViewBtns.get(2).addActionListener(this.fileListViewService);
 
         this.fileListViewRadio = new Vector<JRadioButton>();
         this.fileListViewRadioGroup = new ButtonGroup();
+
+
+        JPanel raidoBtnPanel =  null;
 
         if (username != null && username.length() > 0) {
             for(int i=0; i<this.restPostService.getListOfPostFiles(username).size();i++) {
                 this.fileListViewRadio.add(new JRadioButton(this.restPostService.getListOfPostFiles(username).get(i)));
                 fileListViewRadioGroup.add(this.fileListViewRadio.get(i));
             }
+            raidoBtnPanel = new JPanel();
         }
 
         this.fileListViewPanel.add(this.fileListViewLabs.get(0));
         for(int i=0;i<this.fileListViewRadio.size(); i++) {
-            this.fileListViewPanel.add(this.fileListViewRadio.get(i));
+            raidoBtnPanel.add(this.fileListViewRadio.get(i));
         }
 
-        this.fileListViewPanel.add(this.fileListViewBtns.get(0));
-        this.fileListViewPanel.add(this.fileListViewBtns.get(1));
+        if (raidoBtnPanel != null) {
+            this.fileListViewPanel.add(raidoBtnPanel, BorderLayout.NORTH);
+        }
+
+        this.fileListViewPanel.add(this.newPostFileTxt, BorderLayout.LINE_START);
+        this.fileListViewPanel.add(this.fileListViewBtns.get(0), BorderLayout.CENTER);
+        this.fileListViewPanel.add(this.fileListViewBtns.get(1), BorderLayout.LINE_END);
 
         this.add(this.fileListViewPanel);
     }
@@ -69,6 +81,14 @@ public class FileListView extends JPanel {
             }
         }
         return "";
+    }
+
+    public JTextField getNewPostFileTxt() {
+        return newPostFileTxt;
+    }
+
+    public void setNewPostFileTxt(JTextField newPostFileTxt) {
+        this.newPostFileTxt = newPostFileTxt;
     }
 
     public String getUsername() {

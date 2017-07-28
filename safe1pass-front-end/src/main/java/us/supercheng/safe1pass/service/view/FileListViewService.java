@@ -28,13 +28,42 @@ public class FileListViewService implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() instanceof javax.swing.JButton){
             JButton eventBtn = (JButton) e.getSource();
+            System.out.println("FileListViewService: getNewPostFileTxt: " + this.selfView.getNewPostFileTxt().getText() + ".txt");
+            System.out.println("FileListViewService: getSelectPostFile: " + this.selfView.getSelectPostFile());
+
             if(eventBtn.getText().equals(IViewKeyword.REGISTER_VIEW_CREATE)) {
-                System.out.println(IViewKeyword.REGISTER_VIEW_CREATE + "File");
+
+                if (this.selfView.getNewPostFileTxt().getText().trim().length() > 0) {
+                    System.out.println("IViewKeyword.REGISTER_VIEW_CREATE");
+                    EditorView refreshEditorView = new EditorView(
+                            this.mainPanel,
+                            this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),
+                            "",
+                            this.restPostService.getRestAPIProp(),
+                            this.selfView.getNewPostFileTxt().getText() + ".txt");
+                    // this.mainPanel.add(refreshEditorView), IServiceKeyword.EDITOR_VIEW)
+                    this.mainPanel.add(refreshEditorView, IServiceKeyword.EDITOR_VIEW);
+                    ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
+                } else {
+                    System.out.println("Please enter a valid post name");
+                }
+
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_OPEN)) {
-                // System.out.println("Checking Content:" + postContent);
-                this.mainPanel.add(new EditorView(this.mainPanel, this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),
-                        this.restPostService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),""), this.restPostService.getRestAPIProp()), IServiceKeyword.EDITOR_VIEW);
-                ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
+                System.out.println("IViewKeyword.FILELIST_VIEW_OPEN");
+
+                if(!this.selfView.getSelectPostFile().equals("")) {
+                    EditorView refreshEditorView = new EditorView(
+                            this.mainPanel,
+                            this.selfView.getUsername() + "/",
+                            this.restPostService.getPostContent(this.selfView.getUsername() + "/" + this.selfView.getSelectPostFile(),""),
+                            this.restPostService.getRestAPIProp(),
+                            this.selfView.getSelectPostFile());
+
+                    // this.mainPanel.add(refreshEditorView), IServiceKeyword.EDITOR_VIEW)
+                    this.mainPanel.add(refreshEditorView, IServiceKeyword.EDITOR_VIEW);
+                    ((CardLayout)this.mainPanel.getLayout()).show(this.mainPanel, IServiceKeyword.EDITOR_VIEW);
+                }
+
             } else if(eventBtn.getText().equals(IViewKeyword.FILELIST_VIEW_REFRESH)) {
                 System.out.println(IViewKeyword.FILELIST_VIEW_REFRESH + "File");
             } else {

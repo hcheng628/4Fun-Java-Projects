@@ -46,8 +46,8 @@ public class LoginView extends JPanel {
         this.loginPanel.add(this.loginPw);
         this.loginPanel.add(this.loginViewBtns.get(0));
         this.loginPanel.add(this.loginViewBtns.get(1));
-        this.loginPanel.setMaximumSize(new Dimension(200,300));
-        this.setMaximumSize(new Dimension(200,300));
+//        this.loginPanel.setMaximumSize(new Dimension(200,300));
+//        this.setMaximumSize(new Dimension(200,300));
 
         this.add(this.loginPanel);
     }

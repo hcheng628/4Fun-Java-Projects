@@ -24,8 +24,8 @@ public class App {
 
         LoginView loginView = new LoginView(mainPanel, appProp);
         RegisterView registerView = new RegisterView(mainPanel, appProp);
-        FileListView fileListView = new FileListView(mainPanel,"a", appProp);
-        EditorView editorView = new EditorView(mainPanel, "","", appProp);
+        FileListView fileListView = new FileListView(mainPanel,"", appProp);
+        EditorView editorView = new EditorView(mainPanel, "","", appProp, "");
 
         mainPanel.add(loginView, IServiceKeyword.LOGIN_VIEW);
         mainPanel.add(registerView, IServiceKeyword.REGISTER_VIEW);
@@ -39,7 +39,7 @@ public class App {
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-        mainFrame.setResizable(false);
+        mainFrame.setResizable(true);
     }
 
     private Properties init () throws Exception {

@@ -14,14 +14,18 @@ public class EditorView extends JPanel {
 
     private String postFileFullPath;
     private String postContent;
+    private String postFilename;
     private JTextArea editorViewTxtArea;
     private Vector<JButton> editorViewBtns;
     private  JPanel editorViewPanel;
     private EditorViewService editorViewService;
 
-    public EditorView(JPanel mainPanel, String postFileFullPath, String postContent, Properties inAppProp) {
+    public EditorView(JPanel mainPanel, String postFileFullPath, String postContent, Properties inAppProp, String postFilename) {
+        // System.out.println("EditorView init PostFilename Checking: " + postFilename);
+
         this.postFileFullPath = postFileFullPath;
         this.postContent = postContent;
+        this.postFilename = postFilename;
 
         this.editorViewService = new EditorViewService(this, mainPanel, inAppProp);
         this.editorViewPanel = new JPanel(new FlowLayout());
@@ -41,6 +45,14 @@ public class EditorView extends JPanel {
         this.add(this.editorViewPanel);
     }
 
+    public String getPostFilename() {
+        return postFilename;
+    }
+
+    public void setPostFilename(String postFilename) {
+        this.postFilename = postFilename;
+    }
+
     public String getPostFileFullPath() {
         return postFileFullPath;
     }
@@ -49,6 +61,7 @@ public class EditorView extends JPanel {
 
         return postContent;
     }
+
 
     public void setPostContent(String postContent) {
         this.postContent = postContent;

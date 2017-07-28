@@ -55,6 +55,11 @@ public class RestPostServiceImpl implements IPostService{
 
     @Override
     public void savePost(String username, String postname, String postContent) {
+        System.out.println("savePost:");
+        System.out.println("username: " + username);
+        System.out.println("postname: " + postname);
+        System.out.println("postContent: " + postContent);
+
         try {
             String savePostResponse = this.restAPIHelper.rest_PUT(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_POST),
                    "username=" + username + "&postname=" + postname + "&postcontent=" + postContent,
