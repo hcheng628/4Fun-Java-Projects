@@ -26,16 +26,15 @@ public class CameraViewService implements Runnable, ActionListener {
     }
 
     public void run() {
-        Mat cam = new Mat();
         if (this.selfView.isCameraFlag()) {
             this.selfView.setCamera(new VideoCapture(0));
         }
         while (true) {
-            this.selfView.getCamera().read(cam);
-            if (!cam.empty()) {
+            this.selfView.getCamera().read(this.selfView.getMat());
+            if (!this.selfView.getMat().empty()) {
                 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this.selfView);
-                mainFrame.setSize(cam.width() + 40, cam.height() + 110);
-                this.selfView.setImg(toBufferedImage(cam));
+                mainFrame.setSize(this.selfView.getMat().width() + 40, this.selfView.getMat().height() + 110);
+                this.selfView.setImg(toBufferedImage(this.selfView.getMat()));
                 this.selfView.repaint();
             }
         }
@@ -53,6 +52,16 @@ public class CameraViewService implements Runnable, ActionListener {
                 }
             } else if (eventMenuItem.getText().indexOf(IViewKeyword.CameraPanel_CAMERA) >= 0) {
                 this.switchCamera((Integer.parseInt(eventMenuItem.getText().replaceAll("\\D+", "")) - 1));
+            } else if (eventMenuItem.getText().indexOf(IViewKeyword.CameraPanel_DETECTION_OFF.substring(0,10))>=0) {
+               if (eventMenuItem.getText().indexOf(IViewKeyword.CameraPanel_DETECTION_OFF.substring(10))>=0) {
+                    System.out.println("User Turn Off " + eventMenuItem.getText().indexOf(IViewKeyword.CameraPanel_DETECTION_OFF.substring(0,10)));
+                    eventMenuItem.setText(IViewKeyword.CameraPanel_DETECTION_OFF);
+                    this.selfView.setDetectionFlag(true);
+               } else {
+                   System.out.println("User Turn On " + eventMenuItem.getText().indexOf(IViewKeyword.CameraPanel_DETECTION_OFF.substring(0,10)));
+                   eventMenuItem.setText(IViewKeyword.CameraPanel_DETECTION_ON);
+                   this.selfView.setDetectionFlag(false);
+               }
             }
         }
     }

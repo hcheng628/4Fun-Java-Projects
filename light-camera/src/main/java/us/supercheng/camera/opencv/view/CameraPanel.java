@@ -1,5 +1,9 @@
 package us.supercheng.camera.opencv.view;
 
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Rect;
+import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 import us.supercheng.camera.opencv.us.supercheng.camera.opencv.service.view.CameraViewService;
 import javax.swing.*;
@@ -17,12 +21,22 @@ public class CameraPanel extends JPanel {
 
     private BufferedImage img;
     private VideoCapture camera;
-
+    private MatOfRect faces;
+    private Mat mat;
+    private CascadeClassifier cascadeClassifier;
     private boolean cameraFlag;
+    private boolean detectionFlag;
     private int cameraIndex;
     private CameraViewService cameraViewService;
 
     public CameraPanel () {
+        this.faces = new MatOfRect();
+        this.mat = new Mat();
+        this.cascadeClassifier = new CascadeClassifier(
+                this.getClass().getResource("/OpenCV/haarcascades/haarcascade_frontalface_default.xml").getPath().substring(1));
+
+        // System.out.println(this.getClass().getResource("/OpenCV/haarcascades/haarcascade_frontalface_default.xml").getPath().substring(1));
+
         this.cameraViewService = new CameraViewService(this);
 
         this.setLayout(new BorderLayout());
@@ -38,6 +52,11 @@ public class CameraPanel extends JPanel {
             JMenuItem savePic = new JMenuItem(IViewKeyword.CameraPanel_SAVE_PIC);
             savePic.addActionListener(this.cameraViewService);
             this.menuItems.add(savePic);
+
+            this.detectionFlag = false;
+            JMenuItem detService = new JMenuItem(IViewKeyword.CameraPanel_DETECTION_OFF);
+            detService.addActionListener(this.cameraViewService);
+            this.menuItems.add(detService);
         }
 
         while(this.camera.isOpened()) {
@@ -55,6 +74,22 @@ public class CameraPanel extends JPanel {
 
         Thread newThread = new Thread(this.cameraViewService);
         newThread.start();
+    }
+
+    public Mat getMat() {
+        return mat;
+    }
+
+    public void setMat(Mat mat) {
+        this.mat = mat;
+    }
+
+    public boolean isDetectionFlag() {
+        return detectionFlag;
+    }
+
+    public void setDetectionFlag(boolean detectionFlag) {
+        this.detectionFlag = detectionFlag;
     }
 
     public VideoCapture getCamera() {
@@ -92,8 +127,22 @@ public class CameraPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        if (img==null) return;
-        g.drawImage(img,10,40,img.getWidth(),img.getHeight(), null);
+        if (this.img==null) return;
+        g.drawImage(this.img,10,40,this.img.getWidth(),this.img.getHeight(), null);
+
+        System.out.println("Detection: " + this.isDetectionFlag());
+
+        if (this.isDetectionFlag()) {
+            this.faces = new MatOfRect();
+            this.cascadeClassifier.detectMultiScale(this.mat,this.faces);
+            g.setColor(Color.green);
+            for (Rect rect : faces.toArray()) {
+                System.out.println("Painting Detection Area: " + rect.x + 10 + " " + rect.y+40 + " " + rect.width + " " + rect.height);
+                g.drawRect(rect.x + 10, rect.y+40, rect.width, rect.height);
+            }
+        }
+
+
         // g.setColor(Color.GREEN);
 //        for(Rect rect : faceDetections.toArray()){
 //            g.drawRect(rect.x+10, rect.y+40, rect.width, rect.height);

@@ -23,4 +23,14 @@ public class OpenCV_Test {
         mc5.setTo(new Scalar(5));
         System.out.println("Mat Data:\n" + m.dump());
     }
+
+    @Test
+    public void test() {
+        String CameraPanel_DETECTION_ON = "Detection On";
+        String CameraPanel_DETECTION_OFF = "Detection Off";
+
+        System.out.println("DetectionOFF: " + CameraPanel_DETECTION_OFF.indexOf(CameraPanel_DETECTION_OFF.substring(10)));
+        System.out.println("DetectionON: " + CameraPanel_DETECTION_ON.indexOf(CameraPanel_DETECTION_OFF.substring(10)));
+
+    }
 }
