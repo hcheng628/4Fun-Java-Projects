@@ -6,6 +6,8 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 
+import java.util.Date;
+
 /**
  * Created by cl799honchen on 7/30/2017.
  */
@@ -26,11 +28,9 @@ public class OpenCV_Test {
 
     @Test
     public void test() {
-        String CameraPanel_DETECTION_ON = "Detection On";
-        String CameraPanel_DETECTION_OFF = "Detection Off";
+        java.util.Date javaDate = null;
+        java.sql.Date sqlDate = new java.sql.Date(javaDate.getTime());
 
-        System.out.println("DetectionOFF: " + CameraPanel_DETECTION_OFF.indexOf(CameraPanel_DETECTION_OFF.substring(10)));
-        System.out.println("DetectionON: " + CameraPanel_DETECTION_ON.indexOf(CameraPanel_DETECTION_OFF.substring(10)));
-
+        System.out.println("Mat Data:\n" + sqlDate);
     }
 }

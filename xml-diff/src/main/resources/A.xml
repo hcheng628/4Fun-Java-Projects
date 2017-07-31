@@ -1,0 +1,56 @@
+<ApplicationData>
+	<Cheng></Cheng>
+    <ApplicationHeader DebtorNumber="982717011" ECS_ApplicationID="CRIF.9333" ECS_LoginID="UKP" ProductType="EC" SubmissionMethod="E" />
+    <Application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Franchisee>
+            <Demographic BusinessClassCode="FRAN" ClientNumber="1701" FranchiseeName="BOYLE,COLIN" PlatinumStatus="2" PreApplicationAlert="N" StartDate="2013-07-19" ThreeMonthOpeningDelinquencyAverage="0.0522" />
+            <Organization FieldGroup="F10600" RegionCode="10000" RegionalCustomerServiceCenter="GBRRCSC" />
+        </Franchisee>
+        <CurrentStateDecision CreditInvestigationDate="2017-03-22" Decision="A" InterestRate="0.0000" />
+        <ContractHistory>
+            <CurrentContract CreditLimit="7000.00" InterestRate="0.2400" InterestRateBase="0.0000" InterestRateSpread="0.0000" LastPaymentDate="2016-05-26" PaidToDate="0.00" Payoff="5208.84" />
+            <DebtorContractHistory AccountSequenceNumber="4" AmountFinanced="5208.84" LoanType="F" NumberOfInstallments="156" PaymentFrequency="W" PromotionType="SOECSTD" PurchaseDate="2017-03-22" SaleAmount="5208.84">
+            </DebtorContractHistory>
+            <DebtorContractHistory AccountSequenceNumber="3" AmountFinanced="2255.54" LoanType="A" NumberOfInstallments="52" PaymentFrequency="W" PurchaseDate="2015-10-28" SaleAmount="618.00">
+            </DebtorContractHistory>
+            <DebtorContractHistory AccountSequenceNumber="2" AmountFinanced="2100.00" LoanType="F" NumberOfInstallments="52" PaymentFrequency="W" PurchaseDate="2015-09-02" SaleAmount="2100.00">
+            </DebtorContractHistory>
+            <DebtorContractHistory AccountSequenceNumber="1" AmountFinanced="2036.80" LoanType="N" NumberOfInstallments="26" PaymentFrequency="W" PromotionType="PLATINUM" PurchaseDate="2013-09-05" SaleAmount="2036.80">
+            </DebtorContractHistory>
+            <History SaleDate="2017-03-22" TotalAllPurchases="10863.64" TotalPrincipalInterestPaid="5161.41" />
+            <Delq1_24 Aging="PPD" Date="2016-05-01" />
+            <Delq1_24 Aging="PPD" Date="2016-04-01" />
+            <Delq1_24 Aging="PPD" Date="2016-03-01" />
+            <Delq1_24 Aging="PPD" Date="2016-02-01" />
+            <Delq1_24 Aging="PPD" Date="2016-01-01" />
+            <Delq1_24 Aging="PPD" Date="2015-12-01" />
+            <Delq1_24 Aging="CUR" Date="2015-11-01" />
+            <Delq1_24 Aging="PPD" Date="2015-10-01" />
+            <Delq1_24 Aging="CUR" Date="2014-04-01" />
+            <Delq1_24 Aging="CUR" Date="2014-03-01" />
+            <Delq1_24 Aging="CUR" Date="2014-02-01" />
+            <Delq1_24 Aging="CUR" Date="2014-01-01" />
+            <Delq1_24 Aging="CUR" Date="2013-12-01" />
+            <Delq1_24 Aging="PPD" Date="2013-11-01" />
+            <Delq1_24 Aging="PPD" Date="2013-10-01" />
+        </ContractHistory>
+    </Application>
+    <ApplicationToECS />
+    <ApplicationDerived ApplicationID="9085" CreateDateTime="2017-05-26T15:22:16.856" ExpireDate="2017-08-24" MainApplicant="LEE GRAVELY" RAAssurance="N" Recourse="N" RequestedAmount="">
+        <FranchiseeFinancialWorkFields WeeklyExpenses="0">
+            <Personal NetWorth="0" WeeklyExpenses="0">
+                <Assets Cash="0" InvestmentRE="0" MarketableSecurities="0" OtherAssets="0" Residence="0" Retirement="0" TotalAssets="0" Vehicles="0" />
+                <Liabilities InstallemntDebt="0" Mortgage="0" OtherLiabilities="0" OtherMortgage="0" RevolvingDebt="0" TotalLiabilities="0" />
+            </Personal>
+            <Business BusinessEquity="0" EquityRatio="0" WeeklyExpenses="0">
+                <Assets NetInventory="0" OtherAssets="0" RABalance="0" TotalAssets="0" />
+                <Liabilities BusinessLoan="0" OtherLoans="0" SOCEXposure="0" SOTInvoiceBalance="0" TotalLiablilites="0" />
+                <Sales BreakevenPercent="0" Current="0" Increase="0" PaidSalesOverUnder="0" PaidSalesOverUnderPercent="0" Projected="0" RevolvingAccountCollections="0" />
+            </Business>
+            <OtherFinance BalloonAmount="0" DownPaymentEntries="1" MilitaryDiscountAmount="0" RequestDownAmount="0" RevolvingAcctAssurance="N" RevolvingAcctDevCap="0" TradeinAmount="0" UpfrontTax="0" VanLeaseBalance="0" VanLoanBalance="0" VendorVan="N">
+                <DownPayment DownPaymentEntry="1" />
+            </OtherFinance>
+        </FranchiseeFinancialWorkFields>
+        <VerificationData CalledToVerify="N" EmploymentPhone="" MadeContact="N" Notes="" NumberOfHours="" OccupationPosition="" TimeAtJobYYMM="" UseTools="" />
+    </ApplicationDerived>
+</ApplicationData>
