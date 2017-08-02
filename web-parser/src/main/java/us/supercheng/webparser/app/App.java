@@ -12,19 +12,24 @@ import java.awt.*;
  */
 
 public class App {
-    public static void main (String[]  args ) {
-        String webUrl = "http://mycrif.crifnet.com";
-        JFrame mainFrame = new JFrame("Web-Parser");
-        JTabbedPane tabbedPane = new JTabbedPane();
+    private final static String Application_Name = "Web-Parser";
+    private String webUrl;
+    private JFrame mainFrame;
+    private JTabbedPane tabbedPane;
+
+    public App(String webUrl) {
+        this.webUrl = webUrl;
+        this.mainFrame = new JFrame(Application_Name);
+        this.tabbedPane = new JTabbedPane();
+
         try {
-            HTMLParserServiceImpl htmlParserService = new HTMLParserServiceImpl(webUrl);
-            tabbedPane.add("Image", new ImageView(htmlParserService.getAllImages()));
-            tabbedPane.add("Link",  new LinkView(htmlParserService.getAllLinks()));
-            tabbedPane.add("Word Count", new WordCountView(htmlParserService.getAllWordCount()));
+            HTMLParserServiceImpl htmlParserService = new HTMLParserServiceImpl(this.webUrl);
+            this.tabbedPane.add("Image", new ImageView(htmlParserService.getAllImages()));
+            this.tabbedPane.add("Link",  new LinkView(htmlParserService.getAllLinks()));
+            this.tabbedPane.add("Word Count", new WordCountView(htmlParserService.getAllWordCount()));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         JScrollPane scrollFrame = new JScrollPane(tabbedPane);
         scrollFrame.setPreferredSize(new Dimension(330,660));
 
@@ -35,5 +40,11 @@ public class App {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
+    }
+
+    public static void main (String[]  args ) {
+        JFrame frame = new JFrame(Application_Name);
+        String webUrl = JOptionPane.showInputDialog(frame,"Enter Web URL: ", "http://mycrif.crifnet.com");
+        App app = new App(webUrl);
     }
 }

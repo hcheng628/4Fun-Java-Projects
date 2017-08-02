@@ -16,7 +16,7 @@ public class WordCountView extends JPanel {
         this.wordCountLabels = new ArrayList<JLabel>();
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         for (WordCount eachWordCount : inWordCountList ){
-            JLabel eachImgURL = new JLabel(eachWordCount.getWord() + " " + eachWordCount.getCount());
+            JLabel eachImgURL = new JLabel("Count: " + eachWordCount.getCount() + "      " + eachWordCount.getWord());
             this.wordCountLabels.add(eachImgURL);
             this.add(eachImgURL);
         }
