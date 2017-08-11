@@ -1,5 +1,6 @@
 package us.supercheng.safe1pass.service;
 
+import us.supercheng.safe1pass.util.PasswordHelperImpl;
 import us.supercheng.safe1pass.util.RestAPIHelper;
 import java.util.Properties;
 
@@ -16,10 +17,12 @@ public class RestCredentialServiceImpl implements ICredentialService{
 
     private RestAPIHelper restAPIHelper;
     private Properties restAPIProp;
+    private PasswordHelperImpl passwordHelper;
 
     public RestCredentialServiceImpl (Properties inAPIProp) {
         this.restAPIHelper = new RestAPIHelper();
         this.restAPIProp = inAPIProp;
+        this.passwordHelper = new PasswordHelperImpl();
     }
 
     public Properties getRestAPIProp() {
@@ -28,6 +31,7 @@ public class RestCredentialServiceImpl implements ICredentialService{
 
     @Override
     public boolean login(String username, String password) {
+        password = this.passwordHelper.encryptPassword(password);
         try {
             return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_LOGIN),
                     "username=" + username + "&password=" +password, RestAPI_Content_Type));
@@ -47,9 +51,10 @@ public class RestCredentialServiceImpl implements ICredentialService{
 
     @Override
     public boolean createNewCredential(String username, char[] password, char[] confirm) {
+        String newPassword = this.passwordHelper.encryptPassword(new String(password));
         try {
             return Boolean.parseBoolean(this.restAPIHelper.rest_POST(this.restAPIProp.getProperty(RestAPI_Key_BASEURL) + this.restAPIProp.getProperty(RestAPI_Key_REGISTER),
-                    "username=" + username + "&password=" +new String(password), RestAPI_Content_Type));
+                    "username=" + username + "&password=" + newPassword, RestAPI_Content_Type));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
